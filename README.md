@@ -22,7 +22,7 @@ Start by doing either of the following:
 After you have a repo on your machine:
 
 ```sh
-git remote add bones https://github.com/FullstackAcademy/bones.git
+git remote add bones https://github.com/1706-FSA-NY/bones.git
 git fetch bones
 git merge bones/master
 ```
