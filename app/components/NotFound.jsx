@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const NotFound = props => {
   const {pathname} = props.location || {pathname: '<< no path >>'}
@@ -7,10 +7,6 @@ const NotFound = props => {
   return (
     <div>
       <h1>Sorry, I couldn't find <pre>{pathname}</pre></h1>
-      <p>The router gave me these props:</p>
-      <pre>
-        {JSON.stringify(props, null, 2)}
-      </pre>
       <p>Lost? <Link to="/">Here's a way home.</Link></p>
       <cite>~ xoxo, bones.</cite>
     </div>
