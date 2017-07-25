@@ -7,7 +7,7 @@ const db = require('APP/db')
 function seedEverything() {
   const seeded = {
     users: users(),
-    things: things(),
+    // things: things(),
     products: products()
   }
 
