@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('APP/db')
-const User = db.model('users')
+const Products = db.model('products')
 
 // const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
@@ -15,25 +15,47 @@ module.exports = require('express').Router()
   // the concept of admin users.
   // forbidden('listing users is not allowed'),
   (req, res, next) =>
-    User.findAll()
-      .then(users => res.json(users))
+    Products.findAll()
+      .then(products => res.json(products))
       .catch(next))
-
   .post('/',
   (req, res, next) =>
-    User.create(req.body)
-      .then(user => res.status(201).json(user))
+    Products.create(req.body)
+      .then(product => res.status(201).json(product))
       .catch(next))
+  .get('/weapons',
+  (req, res, next) => {
+    Products.findAll(
+      {
+        where: {
+          category: 'weapon'
+        }
+      })
+      .then(found => res.json(found))
+      .catch(next)
+  })
+
+  .get('/costumes',
+  (req, res, next) => {
+    Products.findAll(
+      {
+        where: {
+          category: 'costume'
+        }
+      })
+      .then(found => res.json(found))
+      .catch(next)
+  })
 
   .get('/:id',
   // mustBeLoggedIn,
   (req, res, next) =>
-    User.findById(req.params.id)
-      .then(user => res.json(user))
+    Products.findById(req.params.id)
+      .then(product => res.json(product))
       .catch(next))
 
   .put('/:id', (req, res, next) => {
-    User.find({
+    Products.find({
       where: {
         id: req.params.id
       }
@@ -45,9 +67,8 @@ module.exports = require('express').Router()
       .catch(next)
 
   })
-
   .delete('/:id', (req, res, next) => {
-    User.find({
+    Products.find({
       where: {
         id: req.params.id
       }
