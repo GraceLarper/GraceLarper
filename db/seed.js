@@ -1,13 +1,14 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Thing, Favorite, Promise} = db
+    , {User, Thing, Product, Favorite, Promise} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
   const seeded = {
     users: users(),
     things: things(),
+    products: products()
   }
 
   seeded.favorites = favorites(seeded)
@@ -32,6 +33,188 @@ const things = seed(Thing, {
   surfing: {name: 'surfing'},
   smiting: {name: 'smiting'},
   puppies: {name: 'puppies'},
+})
+
+const products = seed(Product, {
+  sword: {
+    name: 'Broad Sword',
+    description: `King Solomon sword •Medieval Sword. This sword is a huge 45" Overall with a mirror finish 440 stainless steel 35" Blade.Intricate Molded Two-Tone Guard, Pommel & Hilt With Blue Felt. comes with plaque`,
+    price: '$129.00',
+    imageUrl: 'sword.jpg',
+    type: 'weapon',
+    quantity: Math.random() * 100
+  },
+  axe: {
+    name: 'Battle Axe',
+    description: `Alien Fantasy Axe 21" overall 10" blade. Stainless steel main blade with 2 pommel blades. Detachable mini knife hidden in the aliens head. Includes wood display palque`,
+    price: '$99.00',
+    imageUrl: 'axe.jpg',
+    type: 'weapon',
+    quantity: Math.random() * 100
+
+  },
+  crossbow: {
+    name: 'High-Tension Crossbow',
+    description: `Medieval CROSSBOW kit LARP + 5 crossbow bolts / crossbow arrows. Tension of 14-16 kg / 35.0 pounds /. A box: an oak. An arch steel, demountable. In the complete set the fabric cover is applied.`,
+    price: '$199.99',
+    imageUrl: 'crossbow.jpg',
+    type: 'weapon',
+    quantity: Math.random() * 100
+
+  },
+  slingshot: {
+    name: 'Summertime Slingshot',
+    description: 'Summertime Slingshot Kit. this kit includes one slingshot, 100 pieces of steel ammo, and a replacement slingshot band',
+    price: '$12.00',
+    imageUrl: 'slingshot.jpg',
+    type: 'weapon',
+    quantity: Math.random() * 100
+
+  },
+  shield: {
+    name: 'Brass Studded Scottish Targe',
+    description: `The preferred shield of the Highland warrior was the targe. Slightly smaller than the medieval round shield, this Brass Studded Scottish Targe is a reproduction of the Scottish shield, in all its impressive detail and adorned glory.`,
+    price: '$149.99',
+    imageUrl: 'shield.jpg',
+    type: 'weapon',
+    quantity: Math.random() * 100
+
+  },
+  mace: {
+    name: 'Double Ball Mace',
+    description: 'Double Ball Mace 31 1/4" overall with wood handle.',
+    price: '$24.50',
+    imageUrl: 'mace.jpg',
+    type: 'weapon',
+    quantity: Math.random() * 100
+
+  },
+  dagger: {
+    name: '10" Dragon Dagger',
+    description: `Silver Finished Intricate Detailing, Standing Dragon Cast Metal Handle, Dragon on both sides of cast metal scabbard with brilliant Blue background`,
+    price: '$13.75',
+    imageUrl: 'dagger.jpg',
+    type: 'weapon',
+    quantity: Math.random() * 100
+
+  },
+  lance: {
+    name: '14th Century Lance',
+    description: `Playing a significant role in Middle Ages warfare, the lance was a favorite weapon amongst medieval cavalry due to its supreme stopping power. You can experience this game-changing weapon firsthand with the 14th Century Lance. `,
+    price: '$249.50',
+    imageUrl: 'spear.jpg',
+    type: 'weapon',
+    quantity: Math.random() * 100
+
+  },
+  poison: {
+    name: 'Vial of Potent Poison',
+    description: 'Grace Shopper team getting you down? This vial of poison will send them bedridden for a week, guaranteed!',
+    price: '$39.95',
+    imageUrl: 'poison.jpg',
+    type: 'weapon',
+    quantity: Math.random() * 100
+
+  },
+  joust: {
+    name: 'Jousting Lance for Kids',
+    description: 'Playmobil Silver Jousting Lance For Knight, (Some Wear To Silver Coating & Slight Bend)',
+    price: '$169.00',
+    imageUrl: 'joust.jpg',
+    type: 'weapon',
+    quantity: Math.random() * 100
+
+  },
+  helm: {
+    name: '14th Century Dark Night Helm',
+    description: `The great helm is, perhaps, one of the most iconic helmets in medieval history. It possesses a well-known form that is loved, and used, by many who participate in reenactments. And this 14th Century Dark Knight Helm adds a twist to the classic design. `,
+    price: '$171.00',
+    imageUrl: 'helm.jpg',
+    type: 'costume',
+    quantity: Math.random() * 100
+
+  },
+  gauntlet: {
+    name: 'Decorated German Gauntlet',
+    description: `These wearable functional gauntlets are the perfect addition and some times a necessity for any Knight's armour. Functional gauntlets are designed to protect the lower part of the arm, hands and fingers of the sword fighter. `,
+    price: '$211.00',
+    imageUrl: 'gauntlet.jpg',
+    type: 'costume',
+    quantity: Math.random() * 100
+
+  },
+  chainmail: {
+    name: 'Butted Ring Steel Chainmail Coif',
+    description: `From the Celts of 300 B.C. to 18th century Europe, mail such as this Butted Ring Coif was one of the most prized items a warrior could own. Indeed, it was celebrated in poetry and the sagas, being referred to as the Net of Battle.`,
+    price: '$64.00',
+    imageUrl: 'chainmail.jpg',
+    type: 'costume',
+    quantity: Math.random() * 100
+
+  },
+  breastplate: {
+    name: 'Templar Seal Breastplate',
+    description: `The Templar Seal Breastplate by Marto is a one-piece breastplate covering the wearers front. This typical design of breastplate was fairly common for foot soldiers serving in the order of the Knights Templar.`,
+    price: '$564.00',
+    imageUrl: 'breastplate.jpg',
+    type: 'costume',
+    quantity: Math.random() * 100
+
+  },
+  dress: {
+    name: 'Anjou Gown',
+    description: `The romance of the early renaissance is captured in this courtly gown. The Anjou Gown has rich brocades, lavish trims, period rounded shoulders, and an elegant lace up back, all adding to the overall beauty of this piece.`,
+    price: '$339.00',
+    imageUrl: 'dress.jpg',
+    type: 'costume',
+    quantity: Math.random() * 100
+
+  },
+  outfit: {
+    name: 'Complete Knight Outfit',
+    description: `Our Mens Complete Roman Outfit is very historically accurate and you have the option to purchase just the basics or go all out and get all the pieces shown. Get 10% off normal prices by buying the complete set.`,
+    price: '$249.00',
+    imageUrl: 'outfit.jpg',
+    type: 'costume',
+    quantity: Math.random() * 100
+
+  },
+  boots: {
+    name: 'Branded Combat Boots',
+    description: `For a rough and rugged looking compliment to your gothic style, consider the Banded Combat Boots. These boots are surprisingly eye catching, as well as extremely comfortable, making them a great addition to almost any look.`,
+    price: '$89.00',
+    imageUrl: 'boot.jpg',
+    type: 'costume',
+    quantity: Math.random() * 100
+
+  },
+  corset: {
+    name: 'Black Satin Corset',
+    description: `When you need something simple and effective that goes with everything, turn to this Black Satin Underbust Corset. After all, black is a timeless color, which means that this black corset can be paired with most-any garment at all.`,
+    price: '$99.00',
+    imageUrl: 'corset.jpg',
+    type: 'costume',
+    quantity: Math.random() * 100
+
+  },
+  tunic: {
+    name: 'Norman Tunic',
+    description: `The earthy look of the Adelard Norman Tunic evokes eras past and tales of daring. Made of an olive green suede material, this medieval style tunic is perfect for reenactment events, Renaissance fairs, and theatrical performances.`,
+    price: '$75.00',
+    imageUrl: 'tunic.jpg',
+    type: 'costume',
+    quantity: Math.random() * 100
+
+  },
+  cape: {
+    name: 'Bjorn Fur Trimmed Cape',
+    description: `The perfect piece of outerwear for any warrior from the northern lands, the Bjorn Fur Trimmed Cape provides an impressive look with the faux fur trimming the edges. The rectangular cape is crafted from dense cotton canvas material.`,
+    price: '$45.00',
+    imageUrl: 'cape.jpg',
+    type: 'costume',
+    quantity: Math.random() * 100
+
+  },
 })
 
 const favorites = seed(Favorite,
