@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import Carousel from 'react-bootstrap/lib/Carousel'
 import CarouselItem from 'react-bootstrap/lib/Carousel'
 import Sidebar from './Sidebar'
+// OB/ET: dead code
 // import Carousel from 'react-bootstrap/lib/Carousel'
 
 class Body extends Component {
@@ -18,6 +19,7 @@ class Body extends Component {
         <div className="col-xs-10">
           <Carousel>
             <Carousel.Item>
+              {/* OB/ET: use style attribute for width/height instead */}
               <img width={900} height={500} alt="900x500" src="/images/axe.jpg"/>
               <Carousel.Caption>
                 <h3>First slide label</h3>

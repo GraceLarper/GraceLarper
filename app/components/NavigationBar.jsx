@@ -12,7 +12,7 @@ class Navigationbar extends Component {
 
 
   render() {
-    return (
+    return ( // OB/ET: watch out for consistent indentation
     <div>
       <Navbar>
           <Navbar.Header>
