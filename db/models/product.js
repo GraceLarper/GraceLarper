@@ -3,7 +3,10 @@
 const { STRING, ENUM, INTEGER, TEXT } = require('sequelize')
 
 module.exports = db => db.define('products', {
-    category: ENUM('weapon', 'costume'),
+    category: {
+        type: ENUM('weapon', 'costume'),
+        allowNull: false
+    },
     title: STRING,
     description: TEXT,
     price: {
@@ -21,14 +24,15 @@ module.exports = db => db.define('products', {
 },
     {
         getterMethods: {
-            price: function() {
-                const dollarAmt = this.getDataValue('price') / 100
-                return dollarAmt.toFixed(2)
+            getPrice: function() {
+                const dollarAmt = this.getDataValue('price')
+                console.log(dollarAmt);
+                return +dollarAmt.toFixed(2)
             }
         },
         setterMethods: {
-            price: function(dollars) {
-                this.setDataValue('price', dollars * 100)
+            setPrice: function(dollars) {
+                this.setDataValue('price', dollars)
             }
         }
     }

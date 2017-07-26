@@ -7,10 +7,10 @@ import Login from './Login'
 import WhoAmI from './WhoAmI'
 import NotFound from './NotFound'
 import Footer from './Footer'
-import Navigationbar from './Navbar'
+import Navigationbar from './NavigationBar'
 import Sidebar from './Sidebar'
-import Body from
-
+import Body from './Body'
+import AllProducts from './AllProducts'
 
 class Home extends Component {
 
@@ -22,15 +22,14 @@ class Home extends Component {
     return (
       <div>
          <Navigationbar />
-        <Sidebar />
-        <Jumbotron />
+         <Body />
+         <AllProducts />
         <nav>
           {/*user ? <WhoAmI/> : <Login/>*/}
 
         </nav>
         <main>
           <Switch>
-
           </Switch>
         </main>
         <Footer />

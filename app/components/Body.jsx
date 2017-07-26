@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 import Carousel from 'react-bootstrap/lib/Carousel'
 import CarouselItem from 'react-bootstrap/lib/Carousel'
+import Sidebar from './Sidebar'
 // import Carousel from 'react-bootstrap/lib/Carousel'
 
 class Body extends Component {
@@ -10,7 +11,11 @@ class Body extends Component {
 
   render() {
     return (
-        <div>
+      <div className="container-fluid">
+        <div className="col-xs-2">
+          <Sidebar />
+        </div>
+        <div className="col-xs-10">
           <Carousel>
             <Carousel.Item>
               <img width={900} height={500} alt="900x500" src="/images/axe.jpg"/>
@@ -33,9 +38,10 @@ class Body extends Component {
                 <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
               </Carousel.Caption>
             </Carousel.Item>
-    </Carousel>
+          </Carousel>
         </div>
-      )
+      </div>
+    )
   }
 }
 
