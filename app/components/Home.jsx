@@ -7,17 +7,23 @@ import Login from './Login'
 import WhoAmI from './WhoAmI'
 import NotFound from './NotFound'
 import Footer from './Footer'
-import Navbar from './Navbar'
+import Navigationbar from './NavigationBar'
 import Sidebar from './Sidebar'
+import Body from './Body'
+
 
 class Home extends Component {
 
 
   render() {
+
+
+
     return (
       <div>
-        <Navbar />
+         <Navigationbar />
         <Sidebar />
+         <Body />
         <nav>
           {/*user ? <WhoAmI/> : <Login/>*/}
 
