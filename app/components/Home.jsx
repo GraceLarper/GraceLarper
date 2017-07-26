@@ -22,7 +22,6 @@ class Home extends Component {
     return (
       <div>
          <Navigationbar />
-        <Sidebar />
          <Body />
         <nav>
           {/*user ? <WhoAmI/> : <Login/>*/}
@@ -30,7 +29,6 @@ class Home extends Component {
         </nav>
         <main>
           <Switch>
-
           </Switch>
         </main>
         <Footer />

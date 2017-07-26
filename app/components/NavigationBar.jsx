@@ -26,7 +26,6 @@ class Navigationbar extends Component {
             <NavDropdown eventKey={3} title="Products" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1}>Weapons</MenuItem>
               <MenuItem eventKey={3.2}>Costumes</MenuItem>
-
             </NavDropdown>
           </Nav>
         </Navbar>
