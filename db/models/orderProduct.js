@@ -15,9 +15,11 @@ module.exports = db => db.define('OrderProduct',{
 
 },
 {
+  // OB/ET: you could do this differently (use model directly now that you're defining it)
   tableName: 'OrderProduct'
 })
 
+// OB/ET: dead code, unbury it
 // module.exports.associations = (Order, { User, Product }) => {
 //     Order.belongsTo(User, { as: 'customer' })
 //     // Order.hasMany(Product, { through: 'OrderProduct'})
