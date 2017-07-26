@@ -8,6 +8,8 @@ import NavItem from 'react-bootstrap/lib/NavItem'
 import NavDropdown from 'react-bootstrap/lib/NavDropdown'
 import MenuItem from 'react-bootstrap/lib/MenuItem'
 
+import Login from './Login'
+
 class Navigationbar extends Component {
 
 
@@ -29,6 +31,7 @@ class Navigationbar extends Component {
               <MenuItem eventKey={3.2}>Costumes</MenuItem>
             </NavDropdown>
           </Nav>
+          <Login />
         </Navbar>
       </div>
     )
