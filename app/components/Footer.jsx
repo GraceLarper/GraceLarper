@@ -7,8 +7,10 @@ class Navbar extends Component {
 
   render() {
     return (
-      <div>
-        <h3>Footer</h3>
+      <div className="col-xs-12">
+        <hr />
+        <h3>Alexander Zoitos, Daniel Boufford, Jack Jiang</h3>
+        <h4>Fullstack Academy - Grace Hopper Project</h4>
       </div>
     )
   }
