@@ -1,12 +1,14 @@
 const request = require('supertest')
-    , {expect} = require('chai')
-    , db = require('APP/db')
-    , app = require('./start')
+  , { expect } = require('chai')
+  , db = require('APP/db')
+  , {User} = db
+  , app = require('./start')
 
 /* global describe it before afterEach */
 
 describe('/api/users', () => {
   before('Await database sync', () => db.didSync)
+  
   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
 
   describe('GET /:id', () =>
@@ -40,4 +42,26 @@ describe('/api/users', () => {
             email: 'eve@interloper.com'
           })))
     }))
+  describe('PUT /:id', () =>{
+    beforeEach(function(){
+    return User.create({
+      email: "tester@mail.com",
+      password: 1234
+
+    })
+  })
+  
+    it('updates a user information', () =>
+      request(app)
+          .put('/api/users/1')
+          .send({
+            email: 'abc@123.com'
+          })
+          .expect(200)
+          .expect((res) => {
+            expect(res.body).to.contain({
+              email: 'abc@123.com'
+            })
+          })
+    )})
 })

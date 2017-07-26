@@ -7,11 +7,9 @@ const db = require('APP/db')
 /* global describe it before afterEach */
 
 describe('Product', () => {
-    afterEach(function () {
-        return Promise.all([
-            Product.truncate({ cascade: true }),
-        ]);
-    });
+    before('Await database sync', () => db.didSync)
+    afterEach('Clear the tables', () => db.truncate({ cascade: true }))
+
     describe('validations', () => {
 
         // *Assertion translation*:
@@ -52,19 +50,19 @@ describe('Product', () => {
         })
     })
 
-    // describe('getterMethods', () => {
-    //     describe('get the price of a product', () => {
+    describe('getterMethods', () => {
+        describe('get the price of a product', () => {
 
-    //         it('returns the price to a fixed dollar amount', () => {
-    //             const product = Product.build({
-    //                 category: 'weapon',
-    //                 price: 99.59,
-    //             })
-    //             return product.save()
-    //             .then(result => {
-    //                 expect(result.getPrice.toString()).to.equal('99.59');
-    //             })
-    //         })
-    //     })
-    // })
+            it('returns the price to a fixed dollar amount', () => {
+                const product = Product.build({
+                    category: 'weapon',
+                    price: 99.59,
+                })
+                return product.save()
+                    .then(result => {
+                        expect(result.price.toString()).to.equal('99.59');
+                    })
+            })
+        })
+    })
 });
