@@ -7,9 +7,9 @@ import Login from './Login'
 import WhoAmI from './WhoAmI'
 import NotFound from './NotFound'
 import Footer from './Footer'
-import Navigationbar from './NavigationBar'
+import Navigationbar from './Navbar'
 import Sidebar from './Sidebar'
-import Body from './Body'
+import Body from
 
 
 class Home extends Component {
@@ -23,7 +23,7 @@ class Home extends Component {
       <div>
          <Navigationbar />
         <Sidebar />
-         <Body />
+        <Jumbotron />
         <nav>
           {/*user ? <WhoAmI/> : <Login/>*/}
 
