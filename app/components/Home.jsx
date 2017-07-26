@@ -10,7 +10,7 @@ import Footer from './Footer'
 import Navigationbar from './NavigationBar'
 import Sidebar from './Sidebar'
 import Body from './Body'
-
+import AllProducts from './AllProducts'
 
 class Home extends Component {
 
@@ -23,6 +23,7 @@ class Home extends Component {
       <div>
          <Navigationbar />
          <Body />
+         <AllProducts />
         <nav>
           {/*user ? <WhoAmI/> : <Login/>*/}
 
