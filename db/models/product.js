@@ -25,6 +25,10 @@ module.exports = db => db.define('products', {
         type: STRING,
         defaultValue: 'https://lh4.ggpht.com/iEMUA9EncmAZWLaRTC-Z0m-89Nal5OLj5d2sp_i613RLqCA_VQJ9W1wxGq04Bi62CZ8s=w300'
     },
+    starRating: {
+        type: INTEGER,
+        validate: { min: 1, max: 5 }
+    }
 },
     {
         getterMethods: {

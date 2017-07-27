@@ -72,7 +72,8 @@ const products = seed(Product, {
     price: 129,
     imageUrl: 'sword.jpg',
     category: 'weapon',
-    quantity: 17
+    quantity: 17,
+    starRating: 4
     },
   axe: {
     title:'Battle Axe',
@@ -80,7 +81,8 @@ const products = seed(Product, {
     price: 99,
     imageUrl: 'axe.jpg',
     category: 'weapon',
-    quantity: 2
+    quantity: 2,
+    starRating: 5
 
   },
   crossbow: {
@@ -89,7 +91,8 @@ const products = seed(Product, {
     price: 199,
     imageUrl: 'crowwbow.jpg',
     category: 'weapon',
-    quantity: 7
+    quantity: 7,
+    starRating: 2
 
   },
   slingshot: {
@@ -98,7 +101,8 @@ const products = seed(Product, {
     price: 12,
     imageUrl: 'slingshot.jpg',
     category: 'weapon',
-    quantity: 22
+    quantity: 22,
+    starRating: 1
 
   },
   shield: {
@@ -107,7 +111,8 @@ const products = seed(Product, {
     price: 149,
     imageUrl: 'shield.jpg',
     category: 'weapon',
-    quantity: 18
+    quantity: 18,
+    starRating: 2
 
   },
   mace: {
@@ -116,7 +121,8 @@ const products = seed(Product, {
     price: 24,
     imageUrl: 'mace.jpg',
     category: 'weapon',
-    quantity: 80
+    quantity: 80,
+    starRating: 3
 
   },
   dagger: {
@@ -125,7 +131,8 @@ const products = seed(Product, {
     price: 13,
     imageUrl: 'dagger.jpg',
     category: 'weapon',
-    quantity: 54
+    quantity: 54,
+    starRating: 4
 
   },
   lance: {
@@ -134,7 +141,8 @@ const products = seed(Product, {
     price: 249,
     imageUrl: 'spear.jpg',
     category: 'weapon',
-    quantity: 4
+    quantity: 4,
+    starRating: 5
 
   },
   poison: {
@@ -143,7 +151,8 @@ const products = seed(Product, {
     price: 39,
     imageUrl: 'poison.jpg',
     category: 'weapon',
-    quantity: 2
+    quantity: 2,
+    starRating: 4
 
   },
   joust: {
@@ -152,7 +161,8 @@ const products = seed(Product, {
     price: 169,
     imageUrl: 'joust.jpg',
     category: 'weapon',
-    quantity: 12
+    quantity: 12,
+    starRating: 3
 
   },
   helm: {
@@ -161,7 +171,8 @@ const products = seed(Product, {
     price: 171,
     imageUrl: 'helm.jpg',
     category: 'costume',
-    quantity: 23
+    quantity: 23,
+    starRating: 2
 
   },
   gauntlet: {
@@ -170,7 +181,8 @@ const products = seed(Product, {
     price: 211,
     imageUrl: 'guantlet.jpg',
     category: 'costume',
-    quantity: 22
+    quantity: 22,
+    starRating: 1
 
   },
   chainmail: {
@@ -179,7 +191,8 @@ const products = seed(Product, {
     price: 64.00,
     imageUrl: 'chainmail.jpg',
     category: 'costume',
-    quantity: 67
+    quantity: 67,
+    starRating: 2
 
   },
   breastplate: {
@@ -188,7 +201,8 @@ const products = seed(Product, {
     price: 564,
     imageUrl: 'breastplate.jpg',
     category: 'costume',
-    quantity: 44
+    quantity: 44,
+    starRating: 3
 
   },
   dress: {
@@ -197,7 +211,8 @@ const products = seed(Product, {
     price: 339,
     imageUrl: 'dress.jpg',
     category: 'costume',
-    quantity: 38
+    quantity: 38,
+    starRating: 4
 
   },
   outfit: {
@@ -206,7 +221,8 @@ const products = seed(Product, {
     price: 249,
     imageUrl: 'outfit.jpg',
     category: 'costume',
-    quantity: 16
+    quantity: 16,
+    starRating: 5
 
   },
   boots: {
@@ -215,7 +231,8 @@ const products = seed(Product, {
     price: 89,
     imageUrl: 'boot.jpg',
     category: 'costume',
-    quantity: 99
+    quantity: 99,
+    starRating: 4
 
   },
   corset: {
@@ -224,7 +241,8 @@ const products = seed(Product, {
     price: 99,
     imageUrl: 'corset.jpg',
     category: 'costume',
-    quantity: 77
+    quantity: 77,
+    starRating: 3
 
   },
   tunic: {
@@ -233,7 +251,8 @@ const products = seed(Product, {
     price: 75,
     imageUrl: 'tunic.jpg',
     category: 'costume',
-    quantity: 15
+    quantity: 15,
+    starRating: 2
 
   },
   cape: {
@@ -242,7 +261,8 @@ const products = seed(Product, {
     price: 45,
     imageUrl: 'cape.jpg',
     category: 'costume',
-    quantity: 40
+    quantity: 40,
+    starRating: 1
   }
 })
 
