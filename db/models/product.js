@@ -24,15 +24,14 @@ module.exports = db => db.define('products', {
 },
     {
         getterMethods: {
-            getPrice: function() {
-                const dollarAmt = this.getDataValue('price')
-                console.log(dollarAmt);
+            price: function() {
+                const dollarAmt = this.getDataValue('price') / 100
                 return +dollarAmt.toFixed(2)
             }
         },
         setterMethods: {
-            setPrice: function(dollars) {
-                this.setDataValue('price', dollars)
+            price: function(dollars) {
+                this.setDataValue('price', dollars * 100)
             }
         }
     }
