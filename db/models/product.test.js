@@ -19,10 +19,6 @@ describe('Product', () => {
             return product.validate()
                 .then(err => {
                     expect(err).to.be.an('object');
-                    // expect(err.errors).to.contain.a.thing.with.properties({
-                    //     path: 'price',
-                    //     type: 'notNull Violation'
-                    // });
                 });
         });
         //Category must be a 'weapon' or a 'costume'

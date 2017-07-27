@@ -8,7 +8,6 @@ const request = require('supertest')
 
 describe('/api/users', () => {
   before('Await database sync', () => db.didSync)
-  
   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
 
   describe('GET /:id', () =>
@@ -42,15 +41,7 @@ describe('/api/users', () => {
             email: 'eve@interloper.com'
           })))
     }))
-  describe('PUT /:id', () =>{
-    beforeEach(function(){
-    return User.create({
-      email: "tester@mail.com",
-      password: 1234
-
-    })
-  })
-  
+  describe('PUT /:id', () =>{  
     it('updates a user information', () =>
       request(app)
           .put('/api/users/1')
