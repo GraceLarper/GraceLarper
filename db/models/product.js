@@ -7,16 +7,20 @@ module.exports = db => db.define('products', {
         type: ENUM('weapon', 'costume'),
         allowNull: false
     },
-    title: STRING,
+    title: {
+        type: STRING(30),
+        allowNull: false,
+        unique: true
+        },
     description: TEXT,
     price: {
         type: INTEGER,
-        allowNull: false,
-        validate: {
-            notEmpty: false,
-        },
+        allowNull: false
     },
-    quantity: INTEGER,
+    quantity:{
+        type: INTEGER,
+        defaultValue: 0
+    },
     imageUrl: {
         type: STRING,
         defaultValue: 'https://lh4.ggpht.com/iEMUA9EncmAZWLaRTC-Z0m-89Nal5OLj5d2sp_i613RLqCA_VQJ9W1wxGq04Bi62CZ8s=w300'
@@ -24,15 +28,14 @@ module.exports = db => db.define('products', {
 },
     {
         getterMethods: {
-            getPrice: function() {
-                const dollarAmt = this.getDataValue('price')
-                console.log(dollarAmt);
+            price: function() {
+                const dollarAmt = this.getDataValue('price') / 100
                 return +dollarAmt.toFixed(2)
             }
         },
         setterMethods: {
-            setPrice: function(dollars) {
-                this.setDataValue('price', dollars)
+            price: function(dollars) {
+                this.setDataValue('price', dollars * 100)
             }
         }
     }

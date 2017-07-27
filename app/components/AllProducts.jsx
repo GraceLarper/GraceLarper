@@ -39,7 +39,7 @@ class AllProducts extends Component{
     </Col>
     <Col xs={6} md={4}>
       <Thumbnail src="/images/guantlet.jpg" alt="242x200">
-        <h3>Guanlet</h3>
+        <h3>Guantlet</h3>
         <p>pow right in the kisser</p>
         <p>
           <Button bsStyle="primary">Button</Button>&nbsp;

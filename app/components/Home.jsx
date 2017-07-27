@@ -7,7 +7,7 @@ import Login from './Login'
 import WhoAmI from './WhoAmI'
 import NotFound from './NotFound'
 import Footer from './Footer'
-import Navigationbar from './NavigationBar'
+import NavigationBar from './NavigationBar'
 import Sidebar from './Sidebar'
 import Body from './Body'
 import AllProducts from './AllProducts'
@@ -21,7 +21,7 @@ class Home extends Component {
 
     return (
       <div>
-         <Navigationbar />
+         <NavigationBar />
          <Body />
          <AllProducts />
         <nav>

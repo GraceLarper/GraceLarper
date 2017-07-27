@@ -15,7 +15,7 @@ module.exports = db => db.define('OrderProduct',{
 
 },
 {
-  tableName: 'OrderProduct'
+  // tableName: 'OrderProduct'
 })
 
 // module.exports.associations = (Order, { User, Product }) => {
