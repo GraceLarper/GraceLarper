@@ -9,11 +9,14 @@ import NavDropdown from 'react-bootstrap/lib/NavDropdown'
 import MenuItem from 'react-bootstrap/lib/MenuItem'
 
 import Login from './Login'
+import WhoAmI from './WhoAmI'
 
 class Navigationbar extends Component {
+  constructor(props){
+    super(props)
+  }
 
-
-  render() {
+  render(props) {
     return (
     <div>
       <Navbar>
@@ -32,7 +35,7 @@ class Navigationbar extends Component {
 
             </NavDropdown>
           </Nav>
-          <Login />
+            {this.props.user ? <WhoAmI/> : <Login/>}
         </Navbar>
       </div>
     )
@@ -41,4 +44,4 @@ class Navigationbar extends Component {
 
 //CONTAINER
 
-export default connect(null, null)(Navigationbar)
+export default connect(({auth}) => ({user: auth}), null)(Navigationbar)

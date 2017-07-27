@@ -25,7 +25,6 @@ class Home extends Component {
          <Body />
          <AllProducts />
         <nav>
-          {/*user ? <WhoAmI/> : <Login/>*/}
 
         </nav>
         <main>
