@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('APP/db')
-const Products = db.model('products')
+const Product = db.model('products')
 
 // const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
@@ -15,17 +15,17 @@ module.exports = require('express').Router()
   // the concept of admin users.
   // forbidden('listing users is not allowed'),
   (req, res, next) =>
-    Products.findAll()
+    Product.findAll()
       .then(products => res.json(products))
       .catch(next))
   .post('/',
   (req, res, next) =>
-    Products.create(req.body)
+    Product.create(req.body)
       .then(product => res.status(201).json(product))
       .catch(next))
   .get('/weapons',
   (req, res, next) => {
-    Products.findAll(
+    Product.findAll(
       {
         where: {
           category: 'weapon'
@@ -37,7 +37,7 @@ module.exports = require('express').Router()
 
   .get('/costumes',
   (req, res, next) => {
-    Products.findAll(
+    Product.findAll(
       {
         where: {
           category: 'costume'
@@ -50,25 +50,26 @@ module.exports = require('express').Router()
   .get('/:id',
   // mustBeLoggedIn,
   (req, res, next) =>
-    Products.findById(req.params.id)
+    Product.findById(req.params.id)
       .then(product => res.json(product))
       .catch(next))
 
   .put('/:id', (req, res, next) => {
-    Products.find({
+    Product.update(req.body, {
       where: {
         id: req.params.id
-      }
+      },
+      returning: true,
+      plain: true,
     })
       .then(found => {
-        found.update(req.body)
+        res.send({Products: found[1]})
       })
-      .then(found => res.send(found))
       .catch(next)
 
   })
   .delete('/:id', (req, res, next) => {
-    Products.find({
+    Product.find({
       where: {
         id: req.params.id
       }
@@ -77,10 +78,10 @@ module.exports = require('express').Router()
         if (!found) {
           res.sendStatus(404)
         }
-        return found;
+        else return found;
 
       })
-      .then((found) => { return found.destroy() })
-      .then(res.sendStatus(204))
+      .then((found) =>  found.destroy() )
+      .then(()=>res.sendStatus(204))
       .catch(next)
   })
