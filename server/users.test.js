@@ -1,7 +1,8 @@
 const request = require('supertest')
-    , {expect} = require('chai')
-    , db = require('APP/db')
-    , app = require('./start')
+  , { expect } = require('chai')
+  , db = require('APP/db')
+  , {User} = db
+  , app = require('./start')
 
 /* global describe it before afterEach */
 
@@ -40,4 +41,18 @@ describe('/api/users', () => {
             email: 'eve@interloper.com'
           })))
     }))
+  describe('PUT /:id', () =>{  
+    it('updates a user information', () =>
+      request(app)
+          .put('/api/users/1')
+          .send({
+            email: 'abc@123.com'
+          })
+          .expect(200)
+          .expect((res) => {
+            expect(res.body).to.contain({
+              email: 'abc@123.com'
+            })
+          })
+    )})
 })
