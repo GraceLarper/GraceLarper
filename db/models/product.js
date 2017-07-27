@@ -8,7 +8,7 @@ module.exports = db => db.define('products', {
         allowNull: false
     },
     title: {
-        type: STRING(30),
+        type: STRING,
         allowNull: false,
         unique: true
         },

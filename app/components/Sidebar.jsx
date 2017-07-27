@@ -10,7 +10,7 @@ class Sidebar extends Component {
     return (
       <div>
         <h3>Search Items</h3>
-        <input type="text" value="..."></input><br />
+        <input type="text" placeholder="..."></input><br />
         <input type="button" value="search"></input>
         <h3>Filter Items</h3>
         <ul><strong>Product Type</strong>

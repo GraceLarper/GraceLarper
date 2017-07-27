@@ -6,52 +6,59 @@ import Col from 'react-bootstrap/lib/Col'
 import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Row from 'react-bootstrap/lib/Row'
 import Button from 'react-bootstrap/lib/Button'
+import { getProducts } from '../reducers/products'
+
+import Sidebar from './Sidebar'
 
 
 class AllProducts extends Component{
+  constructor(props){
+    super(props);
+  }
+
+  componentDidMount(){
+    this.props.getProducts()
+  }
 
   render(){
-
+    const products = this.props.products;
+    console.log(products);
     return(
-
-      <div>
+      <div className="container-fluid">
+      <div className="col-xs-2">
+       <Sidebar />
+       </div>
+       <div className="col-xs-10">
         <Grid>
-    <Row>
-    <Col xs={6} md={4}>
-      <Thumbnail src="/images/corset.jpg" alt="242x200">
-        <h3>Corset</h3>
-        <p>suck it in</p>
-        <p>
-          <Button bsStyle="primary">Button</Button>&nbsp;
-          <Button bsStyle="default">Button</Button>
-        </p>
-      </Thumbnail>
-    </Col>
-    <Col xs={6} md={4}>
-      <Thumbnail src="/images/poison.jpg" alt="242x200">
-        <h3>Poison</h3>
-        <p>pocket sand</p>
-        <p>
-          <Button bsStyle="primary">Button</Button>&nbsp;
-          <Button bsStyle="default">Button</Button>
-        </p>
-      </Thumbnail>
-    </Col>
-    <Col xs={6} md={4}>
-      <Thumbnail src="/images/guantlet.jpg" alt="242x200">
-        <h3>Guantlet</h3>
-        <p>pow right in the kisser</p>
-        <p>
-          <Button bsStyle="primary">Button</Button>&nbsp;
-          <Button bsStyle="default">Button</Button>
-        </p>
-      </Thumbnail>
-    </Col>
-    </Row>
-  </Grid>
-        </div>
+          <Row>
+            {products.length && products.map(product => {
+              let productImage = `/images/${product.imageUrl}`
+              return (
+            <Col xs={6} md={4} key={product.id}>
+              <Thumbnail src={productImage} alt="242x200">
+                <h3>{product.title}</h3>
+                <h4>{ '$' + product.price}</h4>
+                <hr></hr>
+                <p>{product.description}</p>
+                <p>
+                  <Button bsStyle="primary">Add to Cart</Button>&nbsp;
+                </p>
+
+              </Thumbnail>
+            </Col>)}
+            )}
+        </Row>
+      </Grid>
+      </div>
+    </div>
     )
   }
 }
 
-export default (AllProducts)
+function mapStateToProps(state) {
+  return {
+    products: state.products
+  }
+}
+
+export default connect(mapStateToProps, {getProducts})(AllProducts)

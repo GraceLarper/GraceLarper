@@ -8,7 +8,6 @@ import WhoAmI from './WhoAmI'
 import NotFound from './NotFound'
 import Footer from './Footer'
 import NavigationBar from './NavigationBar'
-import Sidebar from './Sidebar'
 import Body from './Body'
 import AllProducts from './AllProducts'
 
@@ -16,19 +15,13 @@ class Home extends Component {
 
 
   render() {
-
-
-
     return (
       <div>
          <NavigationBar />
-         <Body />
-         <AllProducts />
-        <nav>
-
-        </nav>
         <main>
           <Switch>
+            <Route exact path = "/" component = { Body } />
+            <Route exact path = "/products" component = { AllProducts} />
           </Switch>
         </main>
         <Footer />
