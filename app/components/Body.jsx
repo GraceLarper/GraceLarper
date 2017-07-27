@@ -11,13 +11,11 @@ class Body extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div className="col-xs-2">
-          <Sidebar />
-        </div>
-        <div className="col-xs-10">
+
+        <div alight = "center">
           <Carousel>
             <Carousel.Item>
-              <img style={{width:750, height:750}} alt="900x500" src="/images/crowwbow.jpg"/>
+              <img style={{width:750, height:750 }} src="/images/crowwbow.jpg" responsive/>
               <Carousel.Caption>
                 <h3>First slide label</h3>
                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>

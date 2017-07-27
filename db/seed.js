@@ -63,7 +63,7 @@ const products = seed(Product, {
     title:'High-Tension Crossbow',
     description: `Medieval CROSSBOW kit LARP + 5 crossbow bolts / crossbow arrows. Tension of 14-16 kg / 35.0 pounds /. A box: an oak. An arch steel, demountable. In the complete set the fabric cover is applied.`,
     price: 199,
-    imageUrl: 'crossbow.jpg',
+    imageUrl: 'crowwbow.jpg',
     category: 'weapon',
     quantity: 7
 
@@ -144,7 +144,7 @@ const products = seed(Product, {
     title:'Decorated German Gauntlet',
     description: `These wearable functional gauntlets are the perfect addition and some times a necessity for any Knight's armour. Functional gauntlets are designed to protect the lower part of the arm, hands and fingers of the sword fighter. `,
     price: 211,
-    imageUrl: 'gauntlet.jpg',
+    imageUrl: 'guantlet.jpg',
     category: 'costume',
     quantity: 22
 
