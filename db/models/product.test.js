@@ -3,7 +3,14 @@
 const db = require('APP/db')
     , { Product } = db
     , { expect } = require('chai')
+    ,  chai = require('chai')
+    ,  chaiProperties  = require('chai-properties')
+    ,  chaiThings = require('chai-things');
 
+
+
+    chai.use(chaiProperties);
+    chai.use(chaiThings);
 /* global describe it before afterEach */
 
 describe('Product', () => {
@@ -19,11 +26,17 @@ describe('Product', () => {
             return product.validate()
                 .then(err => {
                     expect(err).to.be.an('object');
+
+                    expect(err.errors).to.contain.a.thing.with.properties({
+                    path: 'price',
+                    type: 'notNull Violation'
+                    })
                 });
         });
         //Category must be a 'weapon' or a 'costume'
         it('requires a correct category', () => {
             const product = Product.build({
+                title: 'weapontitle',
                 category: 'weapon',
                 price: 100,
             })
@@ -35,6 +48,7 @@ describe('Product', () => {
         })
         it('throws error if category is wrong', () => {
             const product = Product.build({
+                title: 'castletitle',
                 category: 'castle',
                 price: 50,
             })
@@ -51,6 +65,7 @@ describe('Product', () => {
 
             it('returns the price to a fixed dollar amount', () => {
                 const product = Product.build({
+                    title:'weapontitle',
                     category: 'weapon',
                     price: 99.59,
                 })

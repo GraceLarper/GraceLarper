@@ -17,6 +17,7 @@ class Navigationbar extends Component {
     return (
     <div>
       <Navbar>
+
           <Navbar.Header>
             <Navbar.Brand>
               <a href="#">Grace Larper</a>

@@ -33,15 +33,16 @@ module.exports = require('express').Router()
       .catch(next))
 
   .put('/:id', (req, res, next) => {
-    User.find({
+    User.update(req.body, {
       where: {
         id: req.params.id
-      }
+      },
+      returning: true,
+      plain: true,
     })
       .then(found => {
-        found.update(req.body)
+        res.send({User: found[1]})
       })
-      .then(found => res.send(found))
       .catch(next)
 
   })
