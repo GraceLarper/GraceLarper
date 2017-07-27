@@ -1,14 +1,18 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Product, Promise} = db
+    , {User, Product, Order, OrderProduct, Review, Promise} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
   const seeded = {
     users: users(),
-    products: products()
+    products: products(),
+    orders: orders(),
+    reviews: reviews(),
   }
+
+  seeded.orderproducts = orderproducts(seeded)
 
   return Promise.props(seeded)
 }
@@ -27,18 +31,38 @@ const users = seed(User, {
   dan: {
     name:'Dan Boufford',
     email: 'dan@gmail.com',
-    password: '2345'
+    password: '1234'
   },
   alex: {
     name:'Alex Zoitos',
     email: 'alex@example.gov',
-    password: '3456'
+    password: '1234',
+    isAdmin: true
   },
   jack: {
     name:'Jack Jiang',
     email: 'jack@yahoo.com',
-    password: '7890'
+    password: '1234',
+    isAdmin: true
   },
+})
+
+const orders = seed(Order, {
+  order1: {
+    price: 27900,
+    status: 'Created',
+    user_id: 1
+  }
+})
+
+const reviews = seed(Review, {
+  review1: {
+    comment: 'This is the best poison I have ever purchased. Totally got the job done.',
+    starRating: 5,
+    user_id: 1,
+    product_id: 9
+  }
+
 })
 
 const products = seed(Product, {
@@ -222,38 +246,46 @@ const products = seed(Product, {
   }
 })
 
-// const favorites = seed(Favorite,
-//   // We're specifying a function here, rather than just a rows object.
-//   // Using a function lets us receive the previously-seeded rows (the seed
-//   // function does this wiring for us).
-//   //
-//   // This lets us reference previously-created rows in order to create the join
-//   // rows. We can reference them by the names we used above (which is why we used
-//   // Objects above, rather than just arrays).
-//   ({users, things}) => ({
-//     // The easiest way to seed associations seems to be to just create rows
-//     // in the join table.
-//     'obama loves surfing': {
-//       user_id: users.barack.id,    // users.barack is an instance of the User model
-//                                    // that we created in the user seed above.
-//                                    // The seed function wires the promises so that it'll
-//                                    // have been created already.
-//       thing_id: things.surfing.id  // Same thing for things.
-//     },
-//     'god is into smiting': {
-//       user_id: users.god.id,
-//       thing_id: things.smiting.id
-//     },
-//     'obama loves puppies': {
-//       user_id: users.barack.id,
-//       thing_id: things.puppies.id
-//     },
-//     'god loves puppies': {
-//       user_id: users.god.id,
-//       thing_id: things.puppies.id
-//     },
-//   })
-// )
+const orderproducts = seed(OrderProduct,
+  // We're specifying a function here, rather than just a rows object.
+  // Using a function lets us receive the previously-seeded rows (the seed
+  // function does this wiring for us).
+  //
+  // This lets us reference previously-created rows in order to create the join
+  // rows. We can reference them by the names we used above (which is why we used
+  // Objects above, rather than just arrays).
+  ({orders, products}) => ({
+    // The easiest way to seed associations seems to be to just create rows
+    // in the join table.
+    'sword in order1 cart': {
+      price: products.sword.price,
+      quantity: 1,
+      order_id: orders.order1.id,    // users.barack is an instance of the User model
+                                   // that we created in the user seed above.
+                                   // The seed function wires the promises so that it'll
+                                   // have been created already.
+      product_id: products.sword.id  // Same thing for things.
+    },
+    'joust in order1 cart': {
+      price: products.joust.price,
+      quantity: 9,
+      order_id: orders.order1.id,
+      product_id: products.joust.id
+    },
+    'axe in order1 cart': {
+      price: products.axe.price,
+      quantity: 12,
+      order_id: orders.order1.id,
+      product_id: products.axe.id
+    },
+    'helm in order1 cart': {
+      price: products.helm.price,
+      quantity: 2,
+      order_id: orders.order1.id,
+      product_id: products.helm.id
+    },
+  })
+)
 
 
 if (module === require.main) {
