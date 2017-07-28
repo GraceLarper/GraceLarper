@@ -33,7 +33,7 @@ class Navigationbar extends Component {
             <NavDropdown eventKey={3} title="Products" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1} href="/products">All Products</MenuItem>
               <MenuItem eventKey={3.2} href="/products?category=costume">Costumes</MenuItem>
-              <MenuItem eventKey={3.2} href="/products?category=costume">Weapons</MenuItem>
+              <MenuItem eventKey={3.3} href="/products?category=weapon">Weapons</MenuItem>
             </NavDropdown>
           </Nav>
           <Nav pullRight={true}>

@@ -36,10 +36,6 @@ class SingleProduct extends Component{
             <Button bsStyle="primary">Add to Cart</Button>&nbsp;
           </p>
          </div>
-
-
-
-
         </div>
     ) :
     (
