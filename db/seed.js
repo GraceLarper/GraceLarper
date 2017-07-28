@@ -1,14 +1,18 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Product, Promise} = db
+    , {User, Product, Order, OrderProduct, Review, Promise} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
   const seeded = {
     users: users(),
-    products: products()
+    products: products(),
+    orders: orders(),
+    reviews: reviews(),
   }
+
+  seeded.orderproducts = orderproducts(seeded)
 
   return Promise.props(seeded)
 }
@@ -27,18 +31,38 @@ const users = seed(User, {
   dan: {
     name:'Dan Boufford',
     email: 'dan@gmail.com',
-    password: '2345'
+    password: '1234'
   },
   alex: {
     name:'Alex Zoitos',
     email: 'alex@example.gov',
-    password: '3456'
+    password: '1234',
+    isAdmin: true
   },
   jack: {
     name:'Jack Jiang',
     email: 'jack@yahoo.com',
-    password: '7890'
+    password: '1234',
+    isAdmin: true
   },
+})
+
+const orders = seed(Order, {
+  order1: {
+    price: 27900,
+    status: 'Created',
+    user_id: 1
+  }
+})
+
+const reviews = seed(Review, {
+  review1: {
+    comment: 'This is the best poison I have ever purchased. Totally got the job done.',
+    starRating: 5,
+    user_id: 1,
+    product_id: 9
+  }
+
 })
 
 const products = seed(Product, {
@@ -48,7 +72,8 @@ const products = seed(Product, {
     price: 129,
     imageUrl: 'sword.jpg',
     category: 'weapon',
-    quantity: 17
+    quantity: 17,
+    starRating: 4
     },
   axe: {
     title:'Battle Axe',
@@ -56,16 +81,18 @@ const products = seed(Product, {
     price: 99,
     imageUrl: 'axe.jpg',
     category: 'weapon',
-    quantity: 2
+    quantity: 2,
+    starRating: 5
 
   },
   crossbow: {
     title:'High-Tension Crossbow',
     description: `Medieval CROSSBOW kit LARP + 5 crossbow bolts / crossbow arrows. Tension of 14-16 kg / 35.0 pounds /. A box: an oak. An arch steel, demountable. In the complete set the fabric cover is applied.`,
     price: 199,
-    imageUrl: 'crossbow.jpg',
+    imageUrl: 'crowwbow.jpg',
     category: 'weapon',
-    quantity: 7
+    quantity: 7,
+    starRating: 2
 
   },
   slingshot: {
@@ -74,7 +101,8 @@ const products = seed(Product, {
     price: 12,
     imageUrl: 'slingshot.jpg',
     category: 'weapon',
-    quantity: 22
+    quantity: 22,
+    starRating: 1
 
   },
   shield: {
@@ -83,7 +111,8 @@ const products = seed(Product, {
     price: 149,
     imageUrl: 'shield.jpg',
     category: 'weapon',
-    quantity: 18
+    quantity: 18,
+    starRating: 2
 
   },
   mace: {
@@ -92,7 +121,8 @@ const products = seed(Product, {
     price: 24,
     imageUrl: 'mace.jpg',
     category: 'weapon',
-    quantity: 80
+    quantity: 80,
+    starRating: 3
 
   },
   dagger: {
@@ -101,7 +131,8 @@ const products = seed(Product, {
     price: 13,
     imageUrl: 'dagger.jpg',
     category: 'weapon',
-    quantity: 54
+    quantity: 54,
+    starRating: 4
 
   },
   lance: {
@@ -110,7 +141,8 @@ const products = seed(Product, {
     price: 249,
     imageUrl: 'spear.jpg',
     category: 'weapon',
-    quantity: 4
+    quantity: 4,
+    starRating: 5
 
   },
   poison: {
@@ -119,7 +151,8 @@ const products = seed(Product, {
     price: 39,
     imageUrl: 'poison.jpg',
     category: 'weapon',
-    quantity: 2
+    quantity: 2,
+    starRating: 4
 
   },
   joust: {
@@ -128,7 +161,8 @@ const products = seed(Product, {
     price: 169,
     imageUrl: 'joust.jpg',
     category: 'weapon',
-    quantity: 12
+    quantity: 12,
+    starRating: 3
 
   },
   helm: {
@@ -137,16 +171,18 @@ const products = seed(Product, {
     price: 171,
     imageUrl: 'helm.jpg',
     category: 'costume',
-    quantity: 23
+    quantity: 23,
+    starRating: 2
 
   },
   gauntlet: {
     title:'Decorated German Gauntlet',
     description: `These wearable functional gauntlets are the perfect addition and some times a necessity for any Knight's armour. Functional gauntlets are designed to protect the lower part of the arm, hands and fingers of the sword fighter. `,
     price: 211,
-    imageUrl: 'gauntlet.jpg',
+    imageUrl: 'guantlet.jpg',
     category: 'costume',
-    quantity: 22
+    quantity: 22,
+    starRating: 1
 
   },
   chainmail: {
@@ -155,7 +191,8 @@ const products = seed(Product, {
     price: 64.00,
     imageUrl: 'chainmail.jpg',
     category: 'costume',
-    quantity: 67
+    quantity: 67,
+    starRating: 2
 
   },
   breastplate: {
@@ -164,7 +201,8 @@ const products = seed(Product, {
     price: 564,
     imageUrl: 'breastplate.jpg',
     category: 'costume',
-    quantity: 44
+    quantity: 44,
+    starRating: 3
 
   },
   dress: {
@@ -173,7 +211,8 @@ const products = seed(Product, {
     price: 339,
     imageUrl: 'dress.jpg',
     category: 'costume',
-    quantity: 38
+    quantity: 38,
+    starRating: 4
 
   },
   outfit: {
@@ -182,7 +221,8 @@ const products = seed(Product, {
     price: 249,
     imageUrl: 'outfit.jpg',
     category: 'costume',
-    quantity: 16
+    quantity: 16,
+    starRating: 5
 
   },
   boots: {
@@ -191,7 +231,8 @@ const products = seed(Product, {
     price: 89,
     imageUrl: 'boot.jpg',
     category: 'costume',
-    quantity: 99
+    quantity: 99,
+    starRating: 4
 
   },
   corset: {
@@ -200,7 +241,8 @@ const products = seed(Product, {
     price: 99,
     imageUrl: 'corset.jpg',
     category: 'costume',
-    quantity: 77
+    quantity: 77,
+    starRating: 3
 
   },
   tunic: {
@@ -209,7 +251,8 @@ const products = seed(Product, {
     price: 75,
     imageUrl: 'tunic.jpg',
     category: 'costume',
-    quantity: 15
+    quantity: 15,
+    starRating: 2
 
   },
   cape: {
@@ -218,42 +261,51 @@ const products = seed(Product, {
     price: 45,
     imageUrl: 'cape.jpg',
     category: 'costume',
-    quantity: 40
+    quantity: 40,
+    starRating: 1
   }
 })
 
-// const favorites = seed(Favorite,
-//   // We're specifying a function here, rather than just a rows object.
-//   // Using a function lets us receive the previously-seeded rows (the seed
-//   // function does this wiring for us).
-//   //
-//   // This lets us reference previously-created rows in order to create the join
-//   // rows. We can reference them by the names we used above (which is why we used
-//   // Objects above, rather than just arrays).
-//   ({users, things}) => ({
-//     // The easiest way to seed associations seems to be to just create rows
-//     // in the join table.
-//     'obama loves surfing': {
-//       user_id: users.barack.id,    // users.barack is an instance of the User model
-//                                    // that we created in the user seed above.
-//                                    // The seed function wires the promises so that it'll
-//                                    // have been created already.
-//       thing_id: things.surfing.id  // Same thing for things.
-//     },
-//     'god is into smiting': {
-//       user_id: users.god.id,
-//       thing_id: things.smiting.id
-//     },
-//     'obama loves puppies': {
-//       user_id: users.barack.id,
-//       thing_id: things.puppies.id
-//     },
-//     'god loves puppies': {
-//       user_id: users.god.id,
-//       thing_id: things.puppies.id
-//     },
-//   })
-// )
+const orderproducts = seed(OrderProduct,
+  // We're specifying a function here, rather than just a rows object.
+  // Using a function lets us receive the previously-seeded rows (the seed
+  // function does this wiring for us).
+  //
+  // This lets us reference previously-created rows in order to create the join
+  // rows. We can reference them by the names we used above (which is why we used
+  // Objects above, rather than just arrays).
+  ({orders, products}) => ({
+    // The easiest way to seed associations seems to be to just create rows
+    // in the join table.
+    'sword in order1 cart': {
+      price: products.sword.price,
+      quantity: 1,
+      order_id: orders.order1.id,    // users.barack is an instance of the User model
+                                   // that we created in the user seed above.
+                                   // The seed function wires the promises so that it'll
+                                   // have been created already.
+      product_id: products.sword.id  // Same thing for things.
+    },
+    'joust in order1 cart': {
+      price: products.joust.price,
+      quantity: 9,
+      order_id: orders.order1.id,
+      product_id: products.joust.id
+    },
+    'axe in order1 cart': {
+      price: products.axe.price,
+      quantity: 12,
+      order_id: orders.order1.id,
+      product_id: products.axe.id
+    },
+    'helm in order1 cart': {
+      price: products.helm.price,
+      quantity: 2,
+      order_id: orders.order1.id,
+      product_id: products.helm.id
+    },
+  })
+)
 
 
 if (module === require.main) {

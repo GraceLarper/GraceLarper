@@ -14,7 +14,7 @@ class Sidebar extends Component {
         <input type="button" value="search"></input>
         <h3>Filter Items</h3>
         <ul><strong>Product Type</strong>
-          <Link to="#"><li>All</li></Link>
+          <Link to=""><li>All</li></Link>
           <Link to="#"><li>Weapons</li></Link>
           <Link to="#"><li>Costumes</li></Link>
         </ul>
