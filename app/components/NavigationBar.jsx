@@ -27,12 +27,12 @@ class Navigationbar extends Component {
             </Navbar.Brand>
           </Navbar.Header>
           <Nav>
-            <NavItem eventKey={1} href="#">Login</NavItem>
-            <NavItem eventKey={2} href="#">SignUp</NavItem>
+            <Link to="/login-signup"><NavItem eventKey={1} href="#">Login</NavItem></Link>
+            <Link to="/login-signup"><NavItem eventKey={2} href="#">Sign Up</NavItem></Link>
             <NavDropdown eventKey={3} title="Products" id="basic-nav-dropdown">
-              <MenuItem eventKey={3.1}>All Products</MenuItem>
-              <MenuItem eventKey={3.2}>Costumes</MenuItem>
-              <MenuItem eventKey={3.2}>Weapons</MenuItem>
+              <Link to="/products"><MenuItem eventKey={3.1}>All Products</MenuItem></Link>
+              <Link to="/costumes"></Link><MenuItem eventKey={3.2}>Costumes</MenuItem></Link>
+              <Link to="/weapons"><MenuItem eventKey={3.2}>Weapons</MenuItem></Link>
 
             </NavDropdown>
           </Nav>
