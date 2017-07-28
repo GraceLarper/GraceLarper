@@ -18,6 +18,7 @@ class Home extends Component {
 
 
   render() {
+    console.log('are we here');
     return (
       <div>
          <NavigationBar />
@@ -36,4 +37,4 @@ class Home extends Component {
 
 //CONTAINER
 
-export default connect(null, null)(Home)
+export default Home;

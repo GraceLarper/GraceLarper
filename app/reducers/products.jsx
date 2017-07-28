@@ -36,9 +36,9 @@ export function getProducts (queryStatus) {
       .catch((e) => console.error(e))
 }
 
-export function getSingleProduct (productId) {
+export function getSingleProduct (id) {
   return dispatch =>
-    axios.get(`/api/products/${productId}`)
+    axios.get(`/api/products/${id}`)
       .then(result => {
         dispatch(fetchSingleProducts(result.data))
       })
