@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 import Grid from 'react-bootstrap/lib/Grid'
 import Col from 'react-bootstrap/lib/Col'
@@ -7,6 +8,7 @@ import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Row from 'react-bootstrap/lib/Row'
 import Button from 'react-bootstrap/lib/Button'
 import { getProducts } from '../reducers/products'
+
 
 import Sidebar from './Sidebar'
 
@@ -41,7 +43,7 @@ class AllProducts extends Component{
                 <hr></hr>
                 <p>
                   <Button bsStyle="primary">Add to Cart</Button>&nbsp;
-                  <Button bsStyle="link">View Details</Button>&nbsp;
+                  <NavLink to={`/products/${product.id}`}><Button bsStyle="link">View Details</Button>&nbsp;</NavLink>
                 </p>
 
               </Thumbnail>

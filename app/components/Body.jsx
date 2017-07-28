@@ -12,10 +12,10 @@ class Body extends Component {
     return (
       <div className="container-fluid">
 
-        <div alight = "center">
+        <div>
           <Carousel>
             <Carousel.Item>
-              <img style={{width:750, height:750 }} src="/images/crowwbow.jpg" responsive/>
+              <img style={{width:750, height:750 }} src="/images/crowwbow.jpg" />
               <Carousel.Caption>
                 <h3>First slide label</h3>
                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
