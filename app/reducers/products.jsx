@@ -26,5 +26,15 @@ export function getProducts (queryStatus) {
       })
       .catch((e) => console.error(e))
 }
+export function getSingleProduct (queryStatus) {
+  return dispatch =>
+    axios.get(`/api/products${queryStatus}`)
+      .then(result => {
+        dispatch(fetchProducts(result.data))
+      })
+      .catch((e) => console.error(e))
+}
+
+
 
 export default reducer
