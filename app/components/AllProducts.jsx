@@ -17,14 +17,13 @@ class AllProducts extends Component{
   }
 
   componentDidMount(){
-    this.props.getProducts()
+    this.props.getProducts(this.props.location.search)
   }
 
   render(){
     const products = this.props.products;
-    console.log(products);
     return(
-      <div className="container-fluid">
+      <div className="clearfix hidden-sm-up">
       <div className="col-xs-2">
        <Sidebar />
        </div>
@@ -34,14 +33,15 @@ class AllProducts extends Component{
             {products.length && products.map(product => {
               let productImage = `/images/${product.imageUrl}`
               return (
-            <Col xs={6} md={4} key={product.id}>
+            <Col xs={6} md={3} key={product.id}>
               <Thumbnail src={productImage} alt="242x200">
                 <h3>{product.title}</h3>
                 <h4>{ '$' + product.price}</h4>
+                <h5> { 'Stock: ' + product.quantity}</h5>
                 <hr></hr>
-                <p>{product.description}</p>
                 <p>
                   <Button bsStyle="primary">Add to Cart</Button>&nbsp;
+                  <Button bsStyle="link">View Details</Button>&nbsp;
                 </p>
 
               </Thumbnail>
@@ -58,6 +58,14 @@ class AllProducts extends Component{
 function mapStateToProps(state) {
   return {
     products: state.products
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getProducts: (queryStatus) => {
+      dispatch(getProducts(queryStatus))
+    }
   }
 }
 
