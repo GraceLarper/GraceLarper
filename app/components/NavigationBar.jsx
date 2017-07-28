@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import Navbar from 'react-bootstrap/lib/Navbar'
 
@@ -23,20 +24,22 @@ class Navigationbar extends Component {
 
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#">Grace Larper</a>
+              <a href="/">Grace Larper</a>
             </Navbar.Brand>
           </Navbar.Header>
           <Nav>
-            <Link to="/login-signup"><NavItem eventKey={1} href="#">Login</NavItem></Link>
-            <Link to="/login-signup"><NavItem eventKey={2} href="#">Sign Up</NavItem></Link>
+            <NavItem eventKey={1} href="/login-signup">Login</NavItem>
+            <NavItem eventKey={2} href="/login-signup">Sign Up</NavItem>
             <NavDropdown eventKey={3} title="Products" id="basic-nav-dropdown">
-              <Link to="/products"><MenuItem eventKey={3.1}>All Products</MenuItem></Link>
-              <Link to="/costumes"></Link><MenuItem eventKey={3.2}>Costumes</MenuItem></Link>
-              <Link to="/weapons"><MenuItem eventKey={3.2}>Weapons</MenuItem></Link>
-
+              <MenuItem eventKey={3.1} href="/products">All Products</MenuItem>
+              <MenuItem eventKey={3.2} href="/products?category=costume">Costumes</MenuItem>
+              <MenuItem eventKey={3.2} href="/products?category=costume">Weapons</MenuItem>
             </NavDropdown>
           </Nav>
-            {this.props.user ? <WhoAmI/> : <Login/>}
+          <Nav pullRight={true}>
+            <NavItem>{this.props.user ? <WhoAmI/> : <Login/>}</NavItem>
+            <NavItem eventKey={4} href="/cart">My Cart <img src="/images/cart.jpg" style={{width: 25, height: 25}}/></NavItem>
+          </Nav>
         </Navbar>
       </div>
     )
