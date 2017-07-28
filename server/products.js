@@ -3,7 +3,9 @@
 const db = require('APP/db')
 const Product = db.model('products')
 
-// const {mustBeLoggedIn, forbidden} = require('./auth.filters')
+const {mustBeLoggedIn, forbidden} = require('./auth.filters')
+
+// /keyword=?weapons
 
 module.exports = require('express').Router()
   .get('/',
@@ -14,41 +16,30 @@ module.exports = require('express').Router()
   // have to add a role column to the users table to support
   // the concept of admin users.
   // forbidden('listing users is not allowed'),
-  (req, res, next) =>
+  (req, res, next) =>{
+    if(req.query.category){
+      Product.findAll({
+        where:{
+          category: req.query.category
+        }
+      })
+      .then(products=>res.json(products))
+      .catch(next)
+    }
+    else{
     Product.findAll()
       .then(products => res.json(products))
-      .catch(next))
+      .catch(next)}})
+
   .post('/',
   (req, res, next) =>
     Product.create(req.body)
       .then(product => res.status(201).json(product))
       .catch(next))
-  .get('/weapons',
-  (req, res, next) => {
-    Product.findAll(
-      {
-        where: {
-          category: 'weapon'
-        }
-      })
-      .then(found => res.json(found))
-      .catch(next)
-  })
 
-  .get('/costumes',
-  (req, res, next) => {
-    Product.findAll(
-      {
-        where: {
-          category: 'costume'
-        }
-      })
-      .then(found => res.json(found))
-      .catch(next)
-  })
 
   .get('/:id',
-  // mustBeLoggedIn,
+  mustBeLoggedIn,
   (req, res, next) =>
     Product.findById(req.params.id)
       .then(product => res.json(product))

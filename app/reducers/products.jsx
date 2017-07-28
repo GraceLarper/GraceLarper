@@ -18,10 +18,13 @@ export function fetchProducts(products) {
   }
 }
 
-export const getProducts = () =>
-  dispatch =>
-    axios.get('/api/products')
-      .then(result => dispatch(fetchProducts(result.data)))
+export function getProducts (queryStatus) {
+  return dispatch =>
+    axios.get(`/api/products${queryStatus}`)
+      .then(result => {
+        dispatch(fetchProducts(result.data))
+      })
       .catch((e) => console.error(e))
+}
 
 export default reducer
