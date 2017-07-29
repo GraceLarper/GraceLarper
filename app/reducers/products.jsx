@@ -61,6 +61,7 @@ export function getReviewsForSingleProd (id) {
   return dispatch =>
     axios.get(`/api/reviews/${id}`)
       .then(result => {
+        console.log('reults', result)
         dispatch(fetchReviewSingleProduct(result.data))
       })
       .catch((e) => console.error(e))

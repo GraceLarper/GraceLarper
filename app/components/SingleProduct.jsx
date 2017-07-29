@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getSingleProduct} from '../reducers/products'
+import {getSingleProduct, getReviewsForSingleProd} from '../reducers/products'
 
 import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Button from 'react-bootstrap/lib/Button'
@@ -26,14 +26,14 @@ class SingleProduct extends Component{
   }
 
   componentDidMount(){
+    this.props.getReviewsForSingleProd(this.props.match.params.id)
     this.props.getSingleProduct(this.props.match.params.id)
 
   }
 // {'/images/' + singleProduct.imageUrl}
   render(){
     const singleProduct = this.props.products;
-    console.log('signleproduct', singleProduct)
-
+    console.log('props:', this.props)
     return singleProduct? (
       <div>
       <div className="container">
@@ -85,4 +85,4 @@ function mapStateToProps(state, componentProps) {
 
 
 
-export default connect(mapStateToProps, {getSingleProduct})(SingleProduct)
+export default connect(mapStateToProps, {getSingleProduct, getReviewsForSingleProd})(SingleProduct)
