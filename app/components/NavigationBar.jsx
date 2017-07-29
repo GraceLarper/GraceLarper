@@ -37,7 +37,7 @@ class Navigationbar extends Component {
             </NavDropdown>
           </Nav>
           <Nav pullRight={true}>
-            <NavItem>{this.props.user ? <WhoAmI/> : <Login/>}</NavItem>
+            {this.props.user ? <WhoAmI/> : <Login/>}
             <NavItem eventKey={4} href="/cart">My Cart <img src="/images/cart.jpg" style={{width: 25, height: 25}}/></NavItem>
           </Nav>
         </Navbar>
