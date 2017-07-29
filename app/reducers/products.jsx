@@ -7,8 +7,6 @@ const reducer = (state=[], action) => {
       return action.products
     case FETCH_SINGLE_PRODUCTS:
       return [action.product, ...state]
-    case FETCH_REVIEWS:
-      return [action.reviews, ...state]
     default:
       return state
   }
@@ -16,7 +14,8 @@ const reducer = (state=[], action) => {
 
 const FETCH_SINGLE_PRODUCTS = 'FETCH_SINGLE_PRODUCTS'
 const FETCH_PRODUCTS = 'FETCH_PRODUCTS'
-const FETCH_REVIEWS = 'FETCH_REVIEWS'
+
+//ACTION CREATORS
 export function fetchProducts(products) {
   return {
     type: FETCH_PRODUCTS,
@@ -28,13 +27,6 @@ export function fetchSingleProducts(product) {
   return {
     type: FETCH_SINGLE_PRODUCTS,
     product
-  }
-}
-
-export function fetchReviewSingleProduct(reviews){
-  return {
-    type: FETCH_REVIEWS,
-    reviews
   }
 }
 
@@ -57,15 +49,7 @@ export function getSingleProduct (id) {
       .catch((e) => console.error(e))
 }
 
-export function getReviewsForSingleProd (id) {
-  return dispatch =>
-    axios.get(`/api/reviews/${id}`)
-      .then(result => {
-        console.log('reults', result)
-        dispatch(fetchReviewSingleProduct(result.data))
-      })
-      .catch((e) => console.error(e))
-}
+
 
 
 

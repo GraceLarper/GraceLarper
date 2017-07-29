@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getSingleProduct, getReviewsForSingleProd} from '../reducers/products'
+import {getSingleProduct} from '../reducers/products'
+import {getReviewsForSingleProd} from '../reducers/reviews'
 
 import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Button from 'react-bootstrap/lib/Button'
@@ -10,6 +11,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup'
 import FormControl from 'react-bootstrap/lib/FormControl'
 import HelpBlock from 'react-bootstrap/lib/HelpBlock'
 import Grid from 'react-bootstrap/lib/Grid'
+import Well from 'react-bootstrap/lib/Well'
 
 
 
@@ -49,8 +51,20 @@ class SingleProduct extends Component{
           <p>
             <Button bsStyle="primary">Add to Cart</Button>&nbsp;
           </p>
+
          </div>
          </div>
+          <div className="container">
+            <h4>Reviews</h4>
+            <div className="col-xs-6">
+              {this.props.review.map(review=>{
+            return(
+              <div>
+              <img style={{height:25, width: 100}}src='/images/5star.jpg'/>
+            <Well>{review.comment}</Well>
+            </div>)})}
+            </div>
+            </div>
          <div className= "container">
          <div className="col-xs-8">
          <form>
@@ -79,7 +93,8 @@ function mapStateToProps(state, componentProps) {
   console.log('state', state)
   console.log('componentProps', componentProps)
   return {
-    products: state.products[0]
+    products: state.products[0],
+    review: state.reviews
   }
 }
 
