@@ -4,8 +4,7 @@ import axios from 'axios'
 const reducer = (state=[], action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      if (!this.products) return [action.product];
-      else return [...this.products, action.product];
+      return [...state, action.product];
     default:
       return state
   }
@@ -20,10 +19,11 @@ export function addToCartAction(product) {
 }
 
 export function addToCartThunk (productId) {
+  console.log("productID", productId)
   return dispatch =>
-    axios.get(`/api/orders/`)
-      .then(order => {
-        dispatch(addToCartAction(order.data))
+    axios.get(`/api/products/${productId}`)
+      .then(product => {
+        dispatch(addToCartAction(product.data))
       })
       .catch((e) => console.error(e))
 }
