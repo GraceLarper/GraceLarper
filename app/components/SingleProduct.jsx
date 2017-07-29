@@ -1,33 +1,49 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../reducers/products'
+import {getReviewsForSingleProd} from '../reducers/reviews'
 
 import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Button from 'react-bootstrap/lib/Button'
 import Col from 'react-bootstrap/lib/Col'
+import ControlLabel from 'react-bootstrap/lib/ControlLabel'
+import FormGroup from 'react-bootstrap/lib/FormGroup'
+import FormControl from 'react-bootstrap/lib/FormControl'
+import HelpBlock from 'react-bootstrap/lib/HelpBlock'
+import Grid from 'react-bootstrap/lib/Grid'
+import Well from 'react-bootstrap/lib/Well'
+
 
 
 class SingleProduct extends Component{
   constructor(props){
     super(props);
+
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+
+  handleChange(e) {
+    this.setState({ value: e.target.value });
   }
 
   componentDidMount(){
+    this.props.getReviewsForSingleProd(this.props.match.params.id)
     this.props.getSingleProduct(this.props.match.params.id)
 
   }
 // {'/images/' + singleProduct.imageUrl}
   render(){
     const singleProduct = this.props.products;
-    console.log('signleproduct', singleProduct)
-
+    console.log('props:', this.props)
     return singleProduct? (
+      <div>
       <div className="container">
-        <div className="col-xs-6">
-          <Thumbnail src={'/images/' + singleProduct.imageUrl} alt="242x200">
+        <div className="col-xs-3">
+          <Thumbnail style={{width:256, height:256}} src={'/images/' + singleProduct.imageUrl} alt="242x200">
           </Thumbnail>
         </div>
-        <div className="col-xs-6">
+        <div className="col-xs-9">
           <h3>{singleProduct.title}</h3>
           <h4>{'$' + singleProduct.price}</h4>
           <p>{singleProduct.description}</p>
@@ -35,7 +51,36 @@ class SingleProduct extends Component{
           <p>
             <Button bsStyle="primary">Add to Cart</Button>&nbsp;
           </p>
+
          </div>
+         </div>
+          <div className="container">
+            <h4>Reviews</h4>
+            <div className="col-xs-6">
+              {this.props.review.map(review=>{
+            return(
+              <div>
+              <img style={{height:25, width: 100}}src='/images/5star.jpg'/>
+            <Well>{review.comment}</Well>
+            </div>)})}
+            </div>
+            </div>
+         <div className= "container">
+         <div className="col-xs-8">
+         <form>
+        <FormGroup
+          controlId="formControlsTextarea">
+          <ControlLabel>Write a review</ControlLabel>
+            <FormGroup controlId="formControlsTextarea">
+          <FormControl componentClass="textarea" placeholder="Review me"
+            onChange={this.handleChange}/>
+          <HelpBlock>Give us your thoughts on this product</HelpBlock>
+        </FormGroup>
+        </FormGroup>
+        <Button bsStyle="primary">Submit</Button>&nbsp;
+      </form>
+      </div>
+      </div>
         </div>
     ) :
     (
@@ -48,10 +93,11 @@ function mapStateToProps(state, componentProps) {
   console.log('state', state)
   console.log('componentProps', componentProps)
   return {
-    products: state.products[0]
+    products: state.products[0],
+    review: state.reviews
   }
 }
 
 
 
-export default connect(mapStateToProps, {getSingleProduct})(SingleProduct)
+export default connect(mapStateToProps, {getSingleProduct, getReviewsForSingleProd})(SingleProduct)

@@ -32,18 +32,18 @@ class AllProducts extends Component{
     console.log('props', this.props)
     const products = this.props.products;
     return(
-      <div className="clearfix hidden-sm-up">
+      <div>
       <div className="col-xs-2">
        <Sidebar />
        </div>
        <div className="col-xs-10">
         <Grid>
-          <Row>
+          <Row >
             {products.length && products.map(product => {
               let productImage = `/images/${product.imageUrl}`
               return (
             <Col xs={6} md={3} key={product.id}>
-              <Thumbnail src={productImage} alt="242x200">
+              <Thumbnail  style={{height:512}} src={productImage} alt="242x200">
                 <h3>{product.title}</h3>
                 <h4>{ '$' + product.price}</h4>
                 <h5> { 'Stock: ' + product.quantity}</h5>
@@ -58,7 +58,8 @@ class AllProducts extends Component{
         </Row>
       </Grid>
       </div>
-    </div>
+      </div>
+
     )
   }
 }

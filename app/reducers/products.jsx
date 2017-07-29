@@ -14,6 +14,8 @@ const reducer = (state=[], action) => {
 
 const FETCH_SINGLE_PRODUCTS = 'FETCH_SINGLE_PRODUCTS'
 const FETCH_PRODUCTS = 'FETCH_PRODUCTS'
+
+//ACTION CREATORS
 export function fetchProducts(products) {
   return {
     type: FETCH_PRODUCTS,
@@ -27,6 +29,8 @@ export function fetchSingleProducts(product) {
     product
   }
 }
+
+//THUNKS
 export function getProducts (queryStatus) {
   return dispatch =>
     axios.get(`/api/products${queryStatus}`)
@@ -44,6 +48,8 @@ export function getSingleProduct (id) {
       })
       .catch((e) => console.error(e))
 }
+
+
 
 
 
