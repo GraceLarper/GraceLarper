@@ -19,7 +19,7 @@ class Orders extends Component{
   }
 
   render(props){
-
+    console.log(this.props.cart)
     return(
       <div className="container">
         <h1>Shopping Cart</h1>
@@ -32,7 +32,7 @@ class Orders extends Component{
                 <img width={256} height={256} src="/images/sword.jpg" alt="Image"/>
               </Media.Left>
               <Media.Body>
-                <Media.Heading>Item Title</Media.Heading>
+                <Media.Heading></Media.Heading>
                   <h3>TITLE HERE</h3><h4>PRICE HERE</h4><h5>STOCK HERE</h5>
                 <Button bsStyle="warning">Remove From Cart</Button>&nbsp;
                 <NavLink to="URLHERE"><Button bsStyle="link">View Details</Button>&nbsp;</NavLink>
@@ -51,5 +51,13 @@ class Orders extends Component{
   }
 }
 
+//CONTAINER
 
-export default Orders
+const mapState = (state) => {
+  console.log(state)
+return {
+  cart: state.cart
+  }
+}
+
+export default connect(mapState, null)(Orders)
