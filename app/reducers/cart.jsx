@@ -4,8 +4,8 @@ import axios from 'axios'
 const reducer = (state=[], action) => {
   switch (action.type) {
     case ADD_TO_CART:
-    if (!this.products) return [action.product];
-    else return [...this.products, action.product];
+      if (!this.products) return [action.product];
+      else return [...this.products, action.product];
     default:
       return state
   }
