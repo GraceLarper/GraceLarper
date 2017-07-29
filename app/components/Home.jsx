@@ -12,13 +12,13 @@ import NavigationBar from './NavigationBar'
 import Body from './Body'
 import AllProducts from './AllProducts'
 import SingleProduct from './SingleProduct'
+import Orders from './Orders'
 
 
 class Home extends Component {
 
 
   render() {
-    console.log('are we here');
     return (
       <div>
          <NavigationBar />
@@ -27,6 +27,7 @@ class Home extends Component {
             <Route exact path = "/" component = { Body } />
             <Route exact path = "/products" component = { AllProducts} />
             <Route path = '/products/:id' component = { SingleProduct}/>
+            <Route path = '/cart' component = { Orders}/>
           </Switch>
         </main>
         <Footer />

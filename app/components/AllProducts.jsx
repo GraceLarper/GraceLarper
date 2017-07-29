@@ -29,6 +29,7 @@ class AllProducts extends Component{
   }
 
   render(){
+    console.log('props', this.props)
     const products = this.props.products;
     return(
       <div className="clearfix hidden-sm-up">
@@ -64,7 +65,8 @@ class AllProducts extends Component{
 
 function mapStateToProps(state) {
   return {
-    products: state.products
+    products: state.products,
+    user: state.auth
   }
 }
 
