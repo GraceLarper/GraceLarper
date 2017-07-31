@@ -28,7 +28,7 @@ class AllProducts extends Component {
           <Grid>
             <Row >
               {products.length && products.map(product => {
-                let productImage = `/images/${product.imageUrl}`
+                const productImage = `/images/${product.imageUrl}`
                 return (
                   <Col xs={6} md={3} key={product.id}>
                     <Thumbnail style={{ height: 512 }} src={productImage} alt="242x200">
@@ -49,7 +49,7 @@ class AllProducts extends Component {
         </div>
       </div>
 
-   )
+    )
   }
 }
 
