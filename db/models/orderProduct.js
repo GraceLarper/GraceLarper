@@ -7,10 +7,11 @@ module.exports = db => db.define('OrderProduct',{
     type: INTEGER,
     defaultValue: 0
   },
-  quantity: INTEGER
+  quantity:{
+    type: INTEGER,
+    defaultValue: 1
+  }
 })
 
-// module.exports.associations = (Order, { Product, OrderProduct}) => {
-//     Order.belongsTo(User, { as: 'customer' })
-//     Order.hasMany(Product, { through: OrderProduct})
-// }
+module.exports.associations = (Order, { Product, OrderProduct}) => {
+}

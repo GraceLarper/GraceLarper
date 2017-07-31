@@ -2,32 +2,26 @@ import axios from 'axios'
 
 const ADD_TO_CART= 'ADD_TO_CART'
 
-export const addToCart = (product, order) => {
+export const addToCart = product => {
   return {
     type: ADD_TO_CART,
-    product,
-    order
+    product
   }
 }
 
-const reducer = (state={}, action) => {
+const reducer = (state=[], action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      return Object.assign({}, state, {products: [action.product]}, {order: action.order})
+      return [...state, action.product];
     default:
       return state
   }
 }
 
+export const addToCartThunk = (product) => dispatch => {
+  axios.post('/api/orders', product)
+  .then(order => order.data)
+  .then(dispatch(addToCart(product)))
+  }
 
 export default reducer
-
-export function addCart (product) {
-  return dispatch =>
-    axios.get(`/api/orders`)
-      .then(result => {
-        dispatch(addToCart(product, result.data[0]))
-      })
-      .catch((e) => console.error(e))
-}
-
