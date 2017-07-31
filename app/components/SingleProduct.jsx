@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getSingleProduct } from '../reducers/products'
-import { getReviewsForSingleProd, addNewReview} from '../reducers/reviews'
+import { getReviewsForSingleProd, addNewReview } from '../reducers/reviews'
 
 import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Button from 'react-bootstrap/lib/Button'
@@ -29,6 +29,7 @@ class SingleProduct extends Component {
     event.preventDefault();
     const newReview = {
       comment: event.target.comment.value,
+      starRating: event.target.rating.value,
       product_id: this.props.match.params.id,
       user_id: this.props.auth.id
     }
@@ -67,9 +68,10 @@ class SingleProduct extends Component {
           <h4>Reviews</h4>
           <div className="col-xs-6">
             {this.props.review.map(review => {
+              console.log(review);
               return (
                 <div key={review.id}>
-                  <img style={{ height: 25, width: 100 }} src='/images/5star.jpg' />
+                  <img style={{ height: 25, width: 100 }} src={'/images/' + review.starRating + 'star.jpg'} />
                   <Well>{review.comment}</Well>
                 </div>)
             })}
@@ -78,8 +80,8 @@ class SingleProduct extends Component {
         <div className="container">
           <div className="col-xs-8">
             <div>
-            {this.renderNewReview()}
-          </div>
+              {this.renderNewReview()}
+            </div>
           </div>
         </div>
       </div>
@@ -94,13 +96,24 @@ class SingleProduct extends Component {
       <FormGroup controlId="formControlsTextarea">
         <ControlLabel>Write a review</ControlLabel>
         <FormGroup controlId="formControlsTextarea">
-          <FormControl componentClass="textarea" name="comment" placeholder="Review me"/>
+          <FormControl componentClass="textarea" name="comment" placeholder="Review me" />
           <HelpBlock>Give us your thoughts on this product</HelpBlock>
         </FormGroup>
       </FormGroup>
+      <FormGroup controlId="formControlsSelect">
+        <ControlLabel>Leave a Star Rating</ControlLabel>
+        <FormControl componentClass="select" name="rating" placeholder="select">
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+        </FormControl>
+      </FormGroup>
       <Button bsStyle="primary" type="submit">Submit</Button>&nbsp;
       </form>
-    )}
+    )
+  }
 }
 function mapStateToProps(state, componentProps) {
   return {
