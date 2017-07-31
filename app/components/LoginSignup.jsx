@@ -4,39 +4,52 @@ import { Link } from 'react-router-dom'
 
 import Login from './Login'
 import WhoAmI from './WhoAmI'
-
-import FieldGroup from 'react-bootstrap/lib/FieldGroup'
+import { signup } from 'APP/app/reducers/auth'
 
 
 class LoginSignup extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
- render(props) {
-    return (
-    <div>
-      <form>
-          <FieldGroup
-            id="formControlsText"
-            type="text"
-            label="Text"
-            placeholder="Enter text"
-          />
-          <FieldGroup
-            id="formControlsEmail"
-            type="email"
-            label="Email address"
-            placeholder="Enter email"
-          />
-          <FieldGroup
-            id="formControlsPassword"
-            label="Password"
-            type="password"
-          />
-      </form>
-    </div>
+  onSubmit(event) {
+    event.preventDefault()
+    console.log('signup', this.props.signup);
+    const userInfo = {
+      name: event.target.name.value,
+      email: event.target.username.value,
+      password: event.target.password.value
+    }
+    this.props.signup(userInfo)
+    event.target.name.value = ""
+    event.target.username.value = ""
+    event.target.password.value = ""
+  }
 
-    )}
+  render(props) {
+    console.log('props', this.props)
+    return (
+      <div className="container">
+        <div className="col-xs-4">
+          <h3>Register</h3>
+          <form onSubmit={this.onSubmit}>
+            <input name="name" placeholder="name" />
+            <input name="username" placeholder="username" />
+            <input name="password" type="password" placeholder="password" />
+            <input type="submit" value="Register" />
+          </form>
+          <hr></hr>
+          <div>
+            <h3>Login</h3>
+            <Login />
+          </div>
+
+        </div>
+
+      </div>
+
+    )
+  }
 }
-export default connect(({auth}) => ({user: auth}), null)(LoginSignup)
+export default connect(({ auth }) => ({ user: auth }), { signup })(LoginSignup)
