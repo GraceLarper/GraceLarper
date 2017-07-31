@@ -9,6 +9,7 @@ import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Media from 'react-bootstrap/lib/Media'
 import Image from 'react-bootstrap/lib/Image'
 
+
 class Orders extends Component {
   render(props) {
     return (
@@ -48,10 +49,9 @@ class Orders extends Component {
 // CONTAINER
 
 const mapState = (state) => {
-  console.log('cart', state.cart)
   return {
     cart: state.cart
-  }
+    }
 }
 
 export default connect(mapState, null)(Orders)
