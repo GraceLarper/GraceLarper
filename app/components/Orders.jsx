@@ -16,18 +16,18 @@ class Orders extends Component{
   }
 
   render(props){
-    return(
+    return (
       <div className="container">
         <h1>Shopping Cart</h1>
         <hr></hr>
         <div className="col-xs-10">
-          {this.props.cart.map(product => {
+          {this.props.cart.products ? this.props.cart.products.map(product => {
             return (
-              <Accordion>
+              <Accordion key={product.id}>
                 <Panel header={product.title} eventKey="2">
                   <Media>
                     <Media.Left>
-                      <img width={256} height={256} src={product.imageUrl} alt="Image"/>
+                      <img width={256} height={256} src={`/images/${product.imageUrl}`} alt="Image"/>
                     </Media.Left>
                     <Media.Body>
                       <Media.Heading></Media.Heading>
@@ -39,12 +39,13 @@ class Orders extends Component{
                 </Panel>
               </Accordion>
             )
-          })}
-        </div>
+          }) :  
+          (<h1>Cart is Empty</h1>)}
         <div>
           <Button bsStyle="primary">Check Out</Button>&nbsp;
         </div>
       </div>
+    </div>
     )
   }
 }
@@ -52,7 +53,7 @@ class Orders extends Component{
 //CONTAINER
 
 const mapState = (state) => {
-  console.log(state)
+  console.log('cart', state.cart)
 return {
   cart: state.cart
   }

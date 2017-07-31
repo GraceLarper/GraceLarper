@@ -10,10 +10,10 @@ export const addToCart = (product, order) => {
   }
 }
 
-const reducer = (state={}, action) => {
+const reducer = (state={products: []}, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      return Object.assign({}, state, {products: [action.product]}, {order: action.order})
+      return Object.assign({}, state, {products: [...state.products, action.product]}, {order: action.order})
     default:
       return state
   }
