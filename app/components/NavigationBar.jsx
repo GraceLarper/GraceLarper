@@ -12,7 +12,7 @@ import MenuItem from 'react-bootstrap/lib/MenuItem'
 import Login from './Login'
 import WhoAmI from './WhoAmI'
 
-class Navigationbar extends Component {
+class NavigationBar extends Component {
   constructor(props){
     super(props)
   }
@@ -48,4 +48,4 @@ class Navigationbar extends Component {
 
 //CONTAINER
 
-export default connect(({auth}) => ({user: auth}), null)(Navigationbar)
+export default connect(({auth}) => ({user: auth}), null)(NavigationBar)
