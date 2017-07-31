@@ -1,5 +1,8 @@
 'use strict'
 
+const db = require('APP/db')
+const Product = require('./product')
+
 const { INTEGER } = require('sequelize')
 
 module.exports = db => db.define('OrderProduct', {
@@ -11,15 +14,14 @@ module.exports = db => db.define('OrderProduct', {
     type: INTEGER,
     defaultValue: 1
   }
-}
-// ,
-// {
-//   defaultScope: {
-//     include: []
-//   }
-// }
-)
+}, {
+  scopes: {
+    include: [
+      { model: Product }
+    ]
+  }
+})
 
-module.exports.associations = (Order, {Product, OrderProduct}) => {
-
+module.exports.associations = (OrderProduct, {Product}) => {
+  OrderProduct.belongsTo(Product)
 }
