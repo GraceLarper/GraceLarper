@@ -2,12 +2,12 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 
-class Navbar extends Component {
+class Footer extends Component {
 
 
   render() {
     return (
-      <div style={{background:"white"}} className="col-xs-12 navbar-fixed-bottom">
+      <div style={{background:"white"}} className="col-xs-12 footer-fixed-bottom">
         <hr />
         <h3>Alexander Zoitos, Daniel Boufford, Jack Jiang</h3>
         <h4>Fullstack Academy - Grace Hopper Project</h4>
@@ -18,4 +18,4 @@ class Navbar extends Component {
 
 //CONTAINER
 
-export default connect(null, null)(Navbar)
+export default connect(null, null)(Footer)
