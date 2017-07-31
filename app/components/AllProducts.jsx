@@ -17,6 +17,7 @@ class AllProducts extends Component {
     this.props.getProducts(this.props.location.search)
   }
 
+
   render() {
     const products = this.props.products
     return (
@@ -49,7 +50,7 @@ class AllProducts extends Component {
         </div>
       </div>
 
-    )
+   )
   }
 }
 

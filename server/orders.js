@@ -2,12 +2,13 @@
 
 const db = require('APP/db')
 const Order = db.model('orders')
+const Product = db.model('products')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
 
 module.exports = require('express').Router()
-  .get('/',
+  .post('/',
   // The forbidden middleware will fail *all* requests to list users.
   // Remove it if you want to allow anyone to list all users on the site.
   //
@@ -16,19 +17,19 @@ module.exports = require('express').Router()
   // the concept of admin users.
   // forbidden('listing users is not allowed'),
   (req, res, next) => {
-    Order.findOrCreate({
-      where: {
-        user_id: req.session.passport.user,
-        status: "Created"
-      }
-    })
-      .then(orders => res.json(orders))
+    console.log('running')
+    Order.findOrCreate({where: {
+      user_id: req.user.id,
+      status: "Created"
+    }})
+      .spread((order, boolean) => {
+        Product.findById(req.body.id)
+        .then(product => {
+          order.addProduct(product)
+        })
+        .then(product => res.send(product))
+      })
       .catch(next)})
-  .post('/',
-  (req, res, next) =>
-    Order.create(req.body)
-      .then(order => res.status(201).json(order))
-      .catch(next))
   .get('/:id',
   mustBeLoggedIn,
   (req, res, next) =>
