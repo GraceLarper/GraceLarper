@@ -36,7 +36,11 @@ class SingleProduct extends Component {
     addNewReview(newReview)
     event.target.comment.value = '';
   }
+  onSubmitToCart(event){
+    
 
+
+  }
   componentDidMount() {
     this.props.getReviewsForSingleProd(this.props.match.params.id)
     this.props.getSingleProduct(this.props.match.params.id)

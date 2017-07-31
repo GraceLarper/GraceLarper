@@ -8,7 +8,7 @@ import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Row from 'react-bootstrap/lib/Row'
 import Button from 'react-bootstrap/lib/Button'
 import { getProducts } from '../reducers/products'
-import { addToCart } from '../reducers/cart'
+import { addCart } from '../reducers/cart'
 
 
 import Sidebar from './Sidebar'
@@ -43,7 +43,7 @@ class AllProducts extends Component{
                 <h5> { 'Stock: ' + product.quantity}</h5>
                 <hr />
                   <p>
-                    <Button bsStyle="primary" name={product.id} onClick={() => this.props.addToCart(product)}>Add to Cart</Button>&nbsp;
+                    <Button bsStyle="primary" name={product.id} onClick={() => this.props.addCart(product)}>Add to Cart</Button>&nbsp;
                     <NavLink to={`/products/${product.id}`}><Button bsStyle="link">View Details</Button>&nbsp;</NavLink>
                   </p>
               </Thumbnail>
@@ -70,8 +70,8 @@ function mapDispatchToProps(dispatch) {
   return {
     getProducts: (queryStatus) => {
       dispatch(getProducts(queryStatus))
-    }
+    },
   }
 }
 
-export default connect(mapStateToProps, {getProducts, addToCart})(AllProducts)
+export default connect(mapStateToProps, {getProducts, addCart})(AllProducts)
