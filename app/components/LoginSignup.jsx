@@ -6,7 +6,6 @@ import Login from './Login'
 import WhoAmI from './WhoAmI'
 import { signup } from 'APP/app/reducers/auth'
 
-
 class LoginSignup extends Component {
   constructor(props) {
     super(props)
@@ -22,9 +21,9 @@ class LoginSignup extends Component {
       password: event.target.password.value
     }
     this.props.signup(userInfo)
-    event.target.name.value = ""
-    event.target.username.value = ""
-    event.target.password.value = ""
+    event.target.name.value = ''
+    event.target.username.value = ''
+    event.target.password.value = ''
   }
 
   render(props) {

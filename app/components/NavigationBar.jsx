@@ -13,14 +13,10 @@ import Login from './Login'
 import WhoAmI from './WhoAmI'
 
 class NavigationBar extends Component {
-  constructor(props){
-    super(props)
-  }
-
   render(props) {
     return (
-    <div>
-      <Navbar>
+      <div>
+        <Navbar>
 
           <Navbar.Header>
             <Navbar.Brand>
@@ -36,8 +32,8 @@ class NavigationBar extends Component {
             </NavDropdown>
           </Nav>
           <Nav pullRight={true}>
-            {this.props.user ? <WhoAmI/> : <Login/>}
-            <Link to="/cart">My Cart <img src="/images/cart.jpg" style={{width: 25, height: 25}}/></Link>
+            {this.props.user ? <WhoAmI /> : <Login />}
+            <Link to="/cart">My Cart <img src="/images/cart.jpg" style={{ width: 25, height: 25 }} /></Link>
           </Nav>
         </Navbar>
       </div>
@@ -45,6 +41,6 @@ class NavigationBar extends Component {
   }
 }
 
-//CONTAINER
+// CONTAINER
 
-export default connect(({auth}) => ({user: auth}), null)(NavigationBar)
+export default connect(({ auth }) => ({ user: auth }), null)(NavigationBar)
