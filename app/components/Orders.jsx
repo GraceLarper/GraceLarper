@@ -13,9 +13,6 @@ import Image from 'react-bootstrap/lib/Image'
 class Orders extends Component{
   constructor(props){
     super(props);
-
-
-
   }
 
   render(props){
@@ -46,8 +43,6 @@ class Orders extends Component{
         </div>
       </div>
     )
-
-
   }
 }
 

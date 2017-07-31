@@ -29,7 +29,6 @@ class AllProducts extends Component{
   }
 
   render(){
-    console.log('props', this.props)
     const products = this.props.products;
     return(
       <div>
@@ -67,7 +66,8 @@ class AllProducts extends Component{
 function mapStateToProps(state) {
   return {
     products: state.products,
-    user: state.auth
+    user: state.auth,
+    cart: state.cart
   }
 }
 

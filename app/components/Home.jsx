@@ -24,10 +24,10 @@ class Home extends Component {
          <NavigationBar />
         <main>
           <Switch>
-            <Route exact path = "/" component = { Body } />
-            <Route exact path = "/products" component = { AllProducts} />
-            <Route path = '/products/:id' component = { SingleProduct}/>
-            <Route path = '/cart' component = { Orders}/>
+            <Route exact path="/" component={ Body } />
+            <Route exact path="/products" component={ AllProducts } />
+            <Route path='/products/:id' component={ SingleProduct } />
+            <Route path='/cart' component={ Orders } />
           </Switch>
         </main>
         <Footer />
@@ -38,4 +38,9 @@ class Home extends Component {
 
 //CONTAINER
 
-export default Home;
+const mapState = state => ({
+  products: state.products,
+  cart: state.cart
+})
+
+export default connect(mapState, null)(Home);
