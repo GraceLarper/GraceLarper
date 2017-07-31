@@ -27,7 +27,7 @@ class NavigationBar extends Component {
               <a href="/">Grace Larper</a>
             </Navbar.Brand>
           </Navbar.Header>
-          <Nav activeKey={1}>
+          <Nav>
             <NavItem eventKey={1} href="/login-signup">Login/SignUp</NavItem>
             <NavDropdown eventKey={3} title="Products" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1} href="/products">All Products</MenuItem>
