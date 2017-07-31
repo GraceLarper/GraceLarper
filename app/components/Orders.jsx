@@ -9,13 +9,8 @@ import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Media from 'react-bootstrap/lib/Media'
 import Image from 'react-bootstrap/lib/Image'
 
-
-class Orders extends Component{
-  constructor(props){
-    super(props);
-  }
-
-  render(props){
+class Orders extends Component {
+  render(props) {
     return (
       <div className="container">
         <h1>Shopping Cart</h1>
@@ -39,7 +34,7 @@ class Orders extends Component{
                 </Panel>
               </Accordion>
             )
-          }) :  
+          }) :
           (<h1>Cart is Empty</h1>)}
         <div>
           <Button bsStyle="primary">Check Out</Button>&nbsp;
@@ -50,12 +45,12 @@ class Orders extends Component{
   }
 }
 
-//CONTAINER
+// CONTAINER
 
 const mapState = (state) => {
   console.log('cart', state.cart)
-return {
-  cart: state.cart
+  return {
+    cart: state.cart
   }
 }
 
