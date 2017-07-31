@@ -16,7 +16,12 @@ module.exports = require('express').Router()
   // the concept of admin users.
   // forbidden('listing users is not allowed'),
   (req, res, next) => {
-    Order.findAll()
+    Order.findOrCreate({
+      where: {
+        user_id: req.session.passport.user,
+        status: "Created"
+      }
+    })
       .then(orders => res.json(orders))
       .catch(next)})
   .post('/',
