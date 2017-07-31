@@ -16,27 +16,30 @@ class Orders extends Component{
   }
 
   render(props){
-    console.log(this.props.cart)
     return(
       <div className="container">
         <h1>Shopping Cart</h1>
         <hr></hr>
         <div className="col-xs-10">
-        <Accordion>
-          <Panel header="item" eventKey="2">
-            <Media>
-              <Media.Left>
-                <img width={256} height={256} src="/images/sword.jpg" alt="Image"/>
-              </Media.Left>
-              <Media.Body>
-                <Media.Heading></Media.Heading>
-                  <h3>TITLE HERE</h3><h4>PRICE HERE</h4><h5>STOCK HERE</h5>
-                <Button bsStyle="warning">Remove From Cart</Button>&nbsp;
-                <NavLink to="URLHERE"><Button bsStyle="link">View Details</Button>&nbsp;</NavLink>
-              </Media.Body>
-            </Media>
-          </Panel>
-        </Accordion>
+          {this.props.cart.map(product => {
+            return (
+              <Accordion>
+                <Panel header={product.title} eventKey="2">
+                  <Media>
+                    <Media.Left>
+                      <img width={256} height={256} src={product.imageUrl} alt="Image"/>
+                    </Media.Left>
+                    <Media.Body>
+                      <Media.Heading></Media.Heading>
+                        <h3>{product.title}</h3><h4>{product.price}</h4><h5>{product.stock}</h5>
+                      <Button bsStyle="warning">Remove From Cart</Button>&nbsp;
+                      <NavLink to={``}><Button bsStyle="link">View Details</Button>&nbsp;</NavLink>
+                    </Media.Body>
+                  </Media>
+                </Panel>
+              </Accordion>
+            )
+          })}
         </div>
         <div>
           <Button bsStyle="primary">Check Out</Button>&nbsp;
