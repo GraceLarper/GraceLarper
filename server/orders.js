@@ -17,7 +17,6 @@ module.exports = require('express').Router()
   // the concept of admin users.
   // forbidden('listing users is not allowed'),
   (req, res, next) => {
-    console.log('running')
     Order.findOrCreate({where: {
       user_id: req.user.id,
       status: "Created"

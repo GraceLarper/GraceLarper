@@ -2,16 +2,24 @@
 
 const { INTEGER } = require('sequelize')
 
-module.exports = db => db.define('OrderProduct',{
+module.exports = db => db.define('OrderProduct', {
   price: {
     type: INTEGER,
     defaultValue: 0
   },
-  quantity:{
+  quantity: {
     type: INTEGER,
     defaultValue: 1
   }
-})
+}
+// ,
+// {
+//   defaultScope: {
+//     include: []
+//   }
+// }
+)
 
-module.exports.associations = (Order, { Product, OrderProduct}) => {
+module.exports.associations = (Order, {Product, OrderProduct}) => {
+
 }
