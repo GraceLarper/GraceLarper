@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getSingleProduct } from '../reducers/products'
 import { getReviewsForSingleProd, addNewReview } from '../reducers/reviews'
 
+/* OB/ET Same comment on importing */
 import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Button from 'react-bootstrap/lib/Button'
 import Col from 'react-bootstrap/lib/Col'
@@ -19,13 +20,13 @@ class SingleProduct extends Component {
   constructor(props) {
     super(props);
 
-    this.onSubmit = this.onSubmit.bind(this)
+    this.onSubmit = this.onSubmit.bind(this) //OB/ET: Consider arrow function inside of a class definition here, instead of binding in the constructor.
   }
 
 
-  onSubmit(event) {
-    console.log(this.props)
-    const addNewReview = this.props.addNewReview;
+  onSubmit (event) { //OB/ET: Consider arrow function inside of a class definition here, instead of binding in the constructor.
+    console.log(this.props) // OB/ET: Remove console.logs from master
+    const addNewReview = this.props.addNewReview; //OB/ET: If only calling this once consider not declaring a new const for it
     event.preventDefault();
     const newReview = {
       comment: event.target.comment.value,
@@ -34,10 +35,10 @@ class SingleProduct extends Component {
       user_id: this.props.auth.id
     }
     addNewReview(newReview)
-    event.target.comment.value = '';
+    event.target.comment.value = '' // OB/ET: This is changing the DOM directly, not updating it through your Redux store/React virtual DOM...maintain single source of truth. Consider setState().
   }
   onSubmitToCart(event){
-    
+
 
 
   }

@@ -2,9 +2,10 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 import Carousel from 'react-bootstrap/lib/Carousel'
-import CarouselItem from 'react-bootstrap/lib/Carousel'
+import CarouselItem from 'react-bootstrap/lib/Carousel' /* OB/ET: Remove line 6 -- also watch out for importing from same dependency */
 import Sidebar from './Sidebar'
 
+/* OB/ET: Consider using just a function again -- this only renders JSX */
 class Body extends Component {
 
 
@@ -14,6 +15,9 @@ class Body extends Component {
 
         <div>
           <Carousel>
+
+          {/* OB/ET: Consider mapping to generate carousel items */}
+
             <Carousel.Item>
               <img style={{width:750, height:750 }} src="/images/crowwbow.jpg" />
               <Carousel.Caption>
