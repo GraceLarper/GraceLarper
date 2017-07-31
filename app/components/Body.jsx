@@ -44,9 +44,4 @@ class Body extends Component {
 
 //CONTAINER
 
-const mapState = state => ({
-  products: state.products,
-  cart: state.cart
-})
-
-export default connect(mapState, null)(Body)
+export default Body;

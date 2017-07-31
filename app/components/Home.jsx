@@ -36,11 +36,5 @@ class Home extends Component {
   }
 }
 
-//CONTAINER
 
-const mapState = state => ({
-  products: state.products,
-  cart: state.cart
-})
-
-export default connect(mapState, null)(Home);
+export default Home;
