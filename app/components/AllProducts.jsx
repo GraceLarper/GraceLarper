@@ -8,7 +8,7 @@ import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Row from 'react-bootstrap/lib/Row'
 import Button from 'react-bootstrap/lib/Button'
 import { getProducts } from '../reducers/products'
-import { addToCartThunk } from '../reducers/cart'
+import { addToCart } from '../reducers/cart'
 
 
 import Sidebar from './Sidebar'
@@ -17,11 +17,6 @@ import Sidebar from './Sidebar'
 class AllProducts extends Component{
   constructor(props){
     super(props);
-    this.handleAddToCart = this.handleAddToCart.bind(this);
-  }
-
-  handleAddToCart(event) {
-    this.props.addToCartThunk(event.target.name)
   }
 
   componentDidMount(){
@@ -48,7 +43,7 @@ class AllProducts extends Component{
                 <h5> { 'Stock: ' + product.quantity}</h5>
                 <hr />
                   <p>
-                    <Button bsStyle="primary" name={product.id} onClick={this.handleAddToCart}>Add to Cart</Button>&nbsp;
+                    <Button bsStyle="primary" name={product.id} onClick={() => this.props.addToCart(product)}>Add to Cart</Button>&nbsp;
                     <NavLink to={`/products/${product.id}`}><Button bsStyle="link">View Details</Button>&nbsp;</NavLink>
                   </p>
               </Thumbnail>
@@ -79,4 +74,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, {getProducts, addToCartThunk})(AllProducts)
+export default connect(mapStateToProps, {getProducts, addToCart})(AllProducts)

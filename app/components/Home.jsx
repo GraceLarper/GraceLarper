@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 import { NavLink } from 'react-router-dom';
 
 import Login from './Login'
+import LoginPage from './LoginPage'
 import WhoAmI from './WhoAmI'
 import NotFound from './NotFound'
 import Footer from './Footer'
@@ -28,6 +29,7 @@ class Home extends Component {
             <Route exact path="/products" component={ AllProducts } />
             <Route path='/products/:id' component={ SingleProduct } />
             <Route path='/cart' component={ Orders } />
+            <Route path='/login-signup' component={ LoginPage } />
           </Switch>
         </main>
         <Footer />

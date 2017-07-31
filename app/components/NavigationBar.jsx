@@ -38,7 +38,7 @@ class Navigationbar extends Component {
           </Nav>
           <Nav pullRight={true}>
             {this.props.user ? <WhoAmI/> : <Login/>}
-            <NavItem eventKey={4} href="/cart">My Cart <img src="/images/cart.jpg" style={{width: 25, height: 25}}/></NavItem>
+            <Link to="/cart">My Cart <img src="/images/cart.jpg" style={{width: 25, height: 25}}/></Link>
           </Nav>
         </Navbar>
       </div>
