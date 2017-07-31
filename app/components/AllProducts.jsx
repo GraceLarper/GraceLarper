@@ -17,7 +17,8 @@ class AllProducts extends Component {
     this.props.getProducts(this.props.location.search)
   }
 
- render() {
+
+  render() {
     const products = this.props.products
     return (
       <div>
@@ -29,7 +30,7 @@ class AllProducts extends Component {
             <Row >
               {products.length && products.map(product => {
                 let productImage = `/images/${product.imageUrl}`
-               return (
+                return (
                   <Col xs={6} md={3} key={product.id}>
                     <Thumbnail style={{ height: 512 }} src={productImage} alt="242x200">
                       <h3>{product.title}</h3>
