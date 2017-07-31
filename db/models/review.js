@@ -12,6 +12,8 @@ module.exports = db => db.define('reviews', {
     }
 })
 
+/* OB/ET: Consider adding a hook here to update associated Product's star rating */
+
 module.exports.associations = (Review, { Product, User }) => {
     Review.belongsTo(Product)
     Review.belongsTo(User)

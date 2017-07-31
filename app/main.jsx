@@ -11,7 +11,7 @@ import React from 'react'
 import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
-
+/* OB/ET: Dead code / unused dependencies -- consider adding to your linter */
 import store from './store'
 import Home from './components/Home'
 

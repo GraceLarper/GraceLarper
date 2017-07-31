@@ -12,4 +12,5 @@ module.exports = db => db.define('orders', {
 
 module.exports.associations = (Order, { User, Product }) => {
     Order.belongsTo(User)
+    /* OB/ET: Add an association here so you can query Order table for associated Product */
 }

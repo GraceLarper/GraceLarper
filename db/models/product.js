@@ -25,7 +25,7 @@ module.exports = db => db.define('products', {
         type: STRING,
         defaultValue: 'https://lh4.ggpht.com/iEMUA9EncmAZWLaRTC-Z0m-89Nal5OLj5d2sp_i613RLqCA_VQJ9W1wxGq04Bi62CZ8s=w300'
     },
-    starRating: {
+    starRating: {     /* OB/ET: Is this an avg Review score? If so consider not storing directly on Product table, instead working with Review table and adding a hook */
         type: INTEGER,
         validate: { min: 1, max: 5 }
     }

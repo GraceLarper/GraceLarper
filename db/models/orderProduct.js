@@ -14,3 +14,5 @@ module.exports = db => db.define('OrderProduct',{
 //     Order.belongsTo(User, { as: 'customer' })
 //     Order.hasMany(Product, { through: OrderProduct})
 // }
+
+    /* OB/ET: Add an association here so you can query OrderProducts richly */
