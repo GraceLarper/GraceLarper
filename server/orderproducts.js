@@ -1,8 +1,9 @@
 
 const db = require('APP/db')
 const OrderProduct = db.model('OrderProduct')
+const Product = db.model('products')
 
-const {mustBeLoggedIn, forbidden} = require('./auth.filters')
+const { mustBeLoggedIn, forbidden } = require('./auth.filters')
 
 module.exports = require('express').Router()
   .get('/:id',
@@ -17,8 +18,11 @@ module.exports = require('express').Router()
     OrderProduct.findAll({
       where: {
         order_id: req.params.id
-      }
+      },
+      include: [Product]
+
     })
+
       .then(order => res.json(order))
       .catch(next)
   })
