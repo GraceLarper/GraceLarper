@@ -17952,6 +17952,10 @@ var _Profile = __webpack_require__(807);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
+var _Purchased = __webpack_require__(808);
+
+var _Purchased2 = _interopRequireDefault(_Purchased);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17987,7 +17991,8 @@ var Home = function (_Component) {
             _react2.default.createElement(_reactRouterDom.Route, { path: '/products/:id', component: _SingleProduct2.default }),
             _react2.default.createElement(_reactRouterDom.Route, { path: '/cart', component: _Orders2.default }),
             _react2.default.createElement(_reactRouterDom.Route, { path: '/login-signup', component: _LoginSignup2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/profile', component: _Profile2.default })
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/profile', component: _Profile2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/purchased', component: _Purchased2.default })
           )
         ),
         _react2.default.createElement(_Footer2.default, null)
@@ -21783,6 +21788,7 @@ var AllProducts = function (_Component) {
       var _this2 = this;
 
       var products = this.props.products;
+      console.log(this.props.user);
       return _react2.default.createElement(
         'div',
         null,
@@ -21802,7 +21808,7 @@ var AllProducts = function (_Component) {
               null,
               products.length && products.map(function (product) {
                 var productImage = '/images/' + product.imageUrl;
-                return _react2.default.createElement(
+                return _this2.props.user && !_this2.props.user.isAdmin ? _react2.default.createElement(
                   _Col2.default,
                   { xs: 6, md: 3, key: product.id },
                   _react2.default.createElement(
@@ -21843,6 +21849,72 @@ var AllProducts = function (_Component) {
                           _Button2.default,
                           { bsStyle: 'link' },
                           'View Details'
+                        ),
+                        '\xA0'
+                      )
+                    )
+                  )
+                ) : _react2.default.createElement(
+                  _Col2.default,
+                  { xs: 6, md: 3, key: product.id },
+                  _react2.default.createElement(
+                    _Thumbnail2.default,
+                    { style: { height: 512 }, src: productImage, alt: '242x200' },
+                    _react2.default.createElement(
+                      'h3',
+                      null,
+                      product.title
+                    ),
+                    _react2.default.createElement(
+                      'h4',
+                      null,
+                      '$' + product.price
+                    ),
+                    _react2.default.createElement(
+                      'h5',
+                      null,
+                      ' ',
+                      'Stock: ' + product.quantity
+                    ),
+                    _react2.default.createElement('hr', null),
+                    _react2.default.createElement(
+                      'p',
+                      null,
+                      _react2.default.createElement(
+                        _Button2.default,
+                        { bsStyle: 'primary', name: product.id, onClick: function onClick() {
+                            return _this2.props.addToCartThunk(product);
+                          } },
+                        'Add to Cart'
+                      ),
+                      '\xA0',
+                      _react2.default.createElement(
+                        _reactRouterDom.NavLink,
+                        { to: '/products/' + product.id },
+                        _react2.default.createElement(
+                          _Button2.default,
+                          { bsStyle: 'link' },
+                          'View Details'
+                        ),
+                        '\xA0'
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'p',
+                      null,
+                      _react2.default.createElement(
+                        _Button2.default,
+                        { bsStyle: 'btn btn-warning', name: product.id },
+                        'Edit Product'
+                      ),
+                      '\xA0',
+                      _react2.default.createElement(
+                        _reactRouterDom.NavLink,
+                        { to: '#' },
+                        _react2.default.createElement(
+                          _Button2.default,
+                          { bsStyle: 'btn btn-danger' },
+                          'Delete Product'
                         ),
                         '\xA0'
                       )
@@ -21944,12 +22016,12 @@ var Body = function (_Component) {
                 _react2.default.createElement(
                   'h3',
                   null,
-                  'First slide label'
+                  'Omri\'s Crossbow'
                 ),
                 _react2.default.createElement(
                   'p',
                   null,
-                  'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+                  'When it shoots, you better REACT'
                 )
               )
             ),
@@ -21963,12 +22035,12 @@ var Body = function (_Component) {
                 _react2.default.createElement(
                   'h3',
                   null,
-                  'Second slide label'
+                  'Kate\'s Boots'
                 ),
                 _react2.default.createElement(
                   'p',
                   null,
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                  'If you\'re absent 4 times, you\'re getting the BOOT.'
                 )
               )
             ),
@@ -21982,12 +22054,12 @@ var Body = function (_Component) {
                 _react2.default.createElement(
                   'h3',
                   null,
-                  'Third slide label'
+                  'Long Lance'
                 ),
                 _react2.default.createElement(
                   'p',
                   null,
-                  'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
+                  'Poke people from afar.'
                 )
               )
             )
@@ -46484,8 +46556,8 @@ var Orders = function (_Component) {
   }, {
     key: 'checkoutClick',
     value: function checkoutClick(event) {
-      console.log('props', this.props.cart);
       this.props.checkout(this.props.cart.order);
+      this.props.history.push('/purchased');
     }
   }, {
     key: 'render',
@@ -46573,12 +46645,15 @@ var Orders = function (_Component) {
               null,
               'Your Total is: $' + totalPrice + '.00'
             ),
-            _react2.default.createElement(
+            totalPrice ? _react2.default.createElement(
               _Button2.default,
               { onClick: this.checkoutClick, bsStyle: 'primary' },
               'Check Out'
-            ),
-            '\xA0'
+            ) : _react2.default.createElement(
+              _Button2.default,
+              { onClick: this.checkoutClick, bsStyle: 'primary', disabled: true },
+              'Check Out'
+            )
           )
         )
       );
@@ -48609,7 +48684,7 @@ function removeItem(orderId, productId) {
 
 function checkout(orderId) {
   return function (dispatch) {
-    _axios2.default.put('/api/orders/' + orderId, { status: 'Completed' }).then(dispatch(getOrder(orderId))).catch(function (e) {
+    _axios2.default.put('/api/orders/' + orderId, { status: 'Completed' }).catch(function (e) {
       return console.error(e);
     });
   };
@@ -49195,6 +49270,36 @@ var mapState = function mapState(state) {
 };
 
 exports.default = (0, _reactRedux.connect)(mapState, { getReviewsThunk: _reviews.getReviewsThunk })(Profile);
+
+/***/ }),
+/* 808 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Purchased;
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Purchased() {
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'h1',
+      null,
+      'THANKS FOR THE $$'
+    )
+  );
+}
 
 /***/ })
 /******/ ]);
