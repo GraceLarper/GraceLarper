@@ -21788,6 +21788,7 @@ var AllProducts = function (_Component) {
       var _this2 = this;
 
       var products = this.props.products;
+      console.log(this.props.user);
       return _react2.default.createElement(
         'div',
         null,
@@ -21807,7 +21808,7 @@ var AllProducts = function (_Component) {
               null,
               products.length && products.map(function (product) {
                 var productImage = '/images/' + product.imageUrl;
-                return _react2.default.createElement(
+                return _this2.props.user && !_this2.props.user.isAdmin ? _react2.default.createElement(
                   _Col2.default,
                   { xs: 6, md: 3, key: product.id },
                   _react2.default.createElement(
@@ -21848,6 +21849,72 @@ var AllProducts = function (_Component) {
                           _Button2.default,
                           { bsStyle: 'link' },
                           'View Details'
+                        ),
+                        '\xA0'
+                      )
+                    )
+                  )
+                ) : _react2.default.createElement(
+                  _Col2.default,
+                  { xs: 6, md: 3, key: product.id },
+                  _react2.default.createElement(
+                    _Thumbnail2.default,
+                    { style: { height: 512 }, src: productImage, alt: '242x200' },
+                    _react2.default.createElement(
+                      'h3',
+                      null,
+                      product.title
+                    ),
+                    _react2.default.createElement(
+                      'h4',
+                      null,
+                      '$' + product.price
+                    ),
+                    _react2.default.createElement(
+                      'h5',
+                      null,
+                      ' ',
+                      'Stock: ' + product.quantity
+                    ),
+                    _react2.default.createElement('hr', null),
+                    _react2.default.createElement(
+                      'p',
+                      null,
+                      _react2.default.createElement(
+                        _Button2.default,
+                        { bsStyle: 'primary', name: product.id, onClick: function onClick() {
+                            return _this2.props.addToCartThunk(product);
+                          } },
+                        'Add to Cart'
+                      ),
+                      '\xA0',
+                      _react2.default.createElement(
+                        _reactRouterDom.NavLink,
+                        { to: '/products/' + product.id },
+                        _react2.default.createElement(
+                          _Button2.default,
+                          { bsStyle: 'link' },
+                          'View Details'
+                        ),
+                        '\xA0'
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'p',
+                      null,
+                      _react2.default.createElement(
+                        _Button2.default,
+                        { bsStyle: 'btn btn-warning', name: product.id },
+                        'Edit Product'
+                      ),
+                      '\xA0',
+                      _react2.default.createElement(
+                        _reactRouterDom.NavLink,
+                        { to: '#' },
+                        _react2.default.createElement(
+                          _Button2.default,
+                          { bsStyle: 'btn btn-danger' },
+                          'Delete Product'
                         ),
                         '\xA0'
                       )
