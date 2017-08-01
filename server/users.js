@@ -3,7 +3,7 @@
 const db = require('APP/db')
 const User = db.model('users')
 
-const {mustBeLoggedIn, forbidden} = require('./auth.filters')
+const { mustBeLoggedIn, forbidden } = require('./auth.filters')
 
 module.exports = require('express').Router()
   .get('/',
@@ -41,12 +41,10 @@ module.exports = require('express').Router()
       plain: true,
     })
       .then(found => {
-        res.send({User: found[1]})
+        res.send({ User: found[1] })
       })
       .catch(next)
-
   })
-
   .delete('/:id', (req, res, next) => {
     User.find({
       where: {
@@ -57,8 +55,7 @@ module.exports = require('express').Router()
         if (!found) {
           res.sendStatus(404)
         }
-        return found;
-
+        return found
       })
       .then((found) => { return found.destroy() })
       .then(res.sendStatus(204))
