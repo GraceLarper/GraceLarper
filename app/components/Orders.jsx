@@ -8,14 +8,27 @@ import Button from 'react-bootstrap/lib/Button'
 import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Media from 'react-bootstrap/lib/Media'
 import Image from 'react-bootstrap/lib/Image'
-import { getOrderThunk, getOrderIdThunk } from '../reducers/cart'
+import { getOrderThunk, getOrderIdThunk, removeItem } from '../reducers/cart'
 
 class Orders extends Component {
+  constructor(props) {
+    super(props)
+    this.onClick = this.onClick.bind(this)
+  }
   componentDidMount() {
     this.props.getOrderIdThunk()
-    .then(result => {
-      this.props.getOrderThunk(result.order)
-    })
+      .then(result => {
+        this.props.getOrderThunk(result.order)
+      })
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props !== nextProps) {
+      this.setState(nextProps)
+    }
+  }
+  onClick(event) {
+    event.preventDefault()
+    this.props.removeItem(this.props.cart.order, event.target.value)
   }
   render(props) {
     return (
@@ -23,7 +36,7 @@ class Orders extends Component {
         <h1>Shopping Cart</h1>
         <hr></hr>
         <div className="col-xs-10">
-          {this.props.cart.productsForOrder[0] ? this.props.cart.productsForOrder[0].map(product => {
+          {this.props.cart.productsForOrder ? this.props.cart.productsForOrder.map(product => {
             return (
               <Accordion key={product.product.id}>
                 <Panel header={product.product.title} eventKey="2">
@@ -34,7 +47,7 @@ class Orders extends Component {
                     <Media.Body>
                       <Media.Heading></Media.Heading>
                       <h3>{product.product.title}</h3><h4>{product.product.price}</h4><h5>{product.product.stock}</h5>
-                      <Button bsStyle="warning">Remove From Cart</Button>&nbsp;
+                      <Button onClick={this.onClick} value={product.product.id} bsStyle="warning">Remove From Cart</Button>&nbsp;
                       <NavLink to={``}><Button bsStyle="link">View Details</Button>&nbsp;</NavLink>
                     </Media.Body>
                   </Media>
@@ -54,10 +67,9 @@ class Orders extends Component {
 // CONTAINER
 
 const mapState = (state) => {
-  console.log('STATE', state)
   return {
     cart: state.cart
   }
 }
 
-export default connect(mapState, { getOrderThunk, getOrderIdThunk })(Orders)
+export default connect(mapState, { getOrderThunk, getOrderIdThunk, removeItem })(Orders)

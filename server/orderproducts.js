@@ -26,3 +26,17 @@ module.exports = require('express').Router()
       .then(order => res.json(order))
       .catch(next)
   })
+  .delete('/delete/:orderId/:productId',
+  (req, res, next) => {
+    OrderProduct.findOne({
+      where: {
+        order_id: req.params.orderId,
+        product_id: req.params.productId
+      }
+    })
+      .then(found => {
+        return found.destroy()
+      })
+      .then(res.sendStatus(204))
+      .catch(next)
+  })
