@@ -8,6 +8,7 @@ import Body from './Body'
 import AllProducts from './AllProducts'
 import SingleProduct from './SingleProduct'
 import Orders from './Orders'
+import Profile from './Profile'
 
 class Home extends Component {
   render() {
@@ -21,6 +22,7 @@ class Home extends Component {
             <Route path='/products/:id' component={ SingleProduct } />
             <Route path='/cart' component={ Orders } />
             <Route path='/login-signup' component={ LoginSignup } />
+            <Route path='/profile' component={ Profile } />
           </Switch>
         </main>
         <Footer />
