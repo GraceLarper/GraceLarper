@@ -17952,6 +17952,10 @@ var _Profile = __webpack_require__(807);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
+var _Purchased = __webpack_require__(808);
+
+var _Purchased2 = _interopRequireDefault(_Purchased);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17987,7 +17991,8 @@ var Home = function (_Component) {
             _react2.default.createElement(_reactRouterDom.Route, { path: '/products/:id', component: _SingleProduct2.default }),
             _react2.default.createElement(_reactRouterDom.Route, { path: '/cart', component: _Orders2.default }),
             _react2.default.createElement(_reactRouterDom.Route, { path: '/login-signup', component: _LoginSignup2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/profile', component: _Profile2.default })
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/profile', component: _Profile2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/purchased', component: _Purchased2.default })
           )
         ),
         _react2.default.createElement(_Footer2.default, null)
@@ -21944,12 +21949,12 @@ var Body = function (_Component) {
                 _react2.default.createElement(
                   'h3',
                   null,
-                  'First slide label'
+                  'Omri\'s Crossbow'
                 ),
                 _react2.default.createElement(
                   'p',
                   null,
-                  'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+                  'When it shoots, you better REACT'
                 )
               )
             ),
@@ -21963,12 +21968,12 @@ var Body = function (_Component) {
                 _react2.default.createElement(
                   'h3',
                   null,
-                  'Second slide label'
+                  'Kate\'s Boots'
                 ),
                 _react2.default.createElement(
                   'p',
                   null,
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                  'If you\'re absent 4 times, you\'re getting the BOOT.'
                 )
               )
             ),
@@ -21982,12 +21987,12 @@ var Body = function (_Component) {
                 _react2.default.createElement(
                   'h3',
                   null,
-                  'Third slide label'
+                  'Long Lance'
                 ),
                 _react2.default.createElement(
                   'p',
                   null,
-                  'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
+                  'Poke people from afar.'
                 )
               )
             )
@@ -46484,8 +46489,8 @@ var Orders = function (_Component) {
   }, {
     key: 'checkoutClick',
     value: function checkoutClick(event) {
-      console.log('props', this.props.cart);
       this.props.checkout(this.props.cart.order);
+      this.props.history.push('/purchased');
     }
   }, {
     key: 'render',
@@ -46573,12 +46578,15 @@ var Orders = function (_Component) {
               null,
               'Your Total is: $' + totalPrice + '.00'
             ),
-            _react2.default.createElement(
+            totalPrice ? _react2.default.createElement(
               _Button2.default,
               { onClick: this.checkoutClick, bsStyle: 'primary' },
               'Check Out'
-            ),
-            '\xA0'
+            ) : _react2.default.createElement(
+              _Button2.default,
+              { onClick: this.checkoutClick, bsStyle: 'primary', disabled: true },
+              'Check Out'
+            )
           )
         )
       );
@@ -48609,7 +48617,7 @@ function removeItem(orderId, productId) {
 
 function checkout(orderId) {
   return function (dispatch) {
-    _axios2.default.put('/api/orders/' + orderId, { status: 'Completed' }).then(dispatch(getOrder(orderId))).catch(function (e) {
+    _axios2.default.put('/api/orders/' + orderId, { status: 'Completed' }).catch(function (e) {
       return console.error(e);
     });
   };
@@ -49195,6 +49203,36 @@ var mapState = function mapState(state) {
 };
 
 exports.default = (0, _reactRedux.connect)(mapState, { getReviewsThunk: _reviews.getReviewsThunk })(Profile);
+
+/***/ }),
+/* 808 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Purchased;
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Purchased() {
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'h1',
+      null,
+      'THANKS FOR THE $$'
+    )
+  );
+}
 
 /***/ })
 /******/ ]);
