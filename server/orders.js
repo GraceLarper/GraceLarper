@@ -4,11 +4,9 @@ const db = require('APP/db')
 const Order = db.model('orders')
 const Product = db.model('products')
 
-const {mustBeLoggedIn, forbidden} = require('./auth.filters')
-
+const { mustBeLoggedIn, forbidden } = require('./auth.filters')
 
 module.exports = require('express').Router()
-  .post('/',
   // The forbidden middleware will fail *all* requests to list users.
   // Remove it if you want to allow anyone to list all users on the site.
   //
@@ -16,19 +14,34 @@ module.exports = require('express').Router()
   // have to add a role column to the users table to support
   // the concept of admin users.
   // forbidden('listing users is not allowed'),
+  .get('/',
   (req, res, next) => {
-    Order.findOrCreate({where: {
-      user_id: req.user.id,
-      status: "Created"
-    }})
+    Order.findOrCreate({
+      where: {
+        user_id: req.user.id,
+        status: 'Created'
+      }
+    })
+      .then(order => res.json(order))
+      .catch(next)
+  })
+  .post('/',
+  (req, res, next) => {
+    Order.findOrCreate({
+      where: {
+        user_id: req.user.id,
+        status: 'Created'
+      }
+    })
       .spread((order, boolean) => {
         Product.findById(req.body.id)
-        .then(product => {
-          order.addProduct(product)
-        })
-        .then(product => res.send(order))
+          .then(product => {
+            order.addProduct(product)
+          })
+          .then(product => res.send(order))
       })
-      .catch(next)})
+      .catch(next)
+  })
   .get('/:id',
   mustBeLoggedIn,
   (req, res, next) =>
@@ -45,7 +58,7 @@ module.exports = require('express').Router()
       plain: true,
     })
       .then(found => {
-        res.send({Orders: found[1]})
+        res.send({ Orders: found[1] })
       })
       .catch(next)
 
@@ -63,7 +76,7 @@ module.exports = require('express').Router()
         else return found;
 
       })
-      .then((found) =>  found.destroy() )
-      .then(()=>res.sendStatus(204))
+      .then((found) => found.destroy())
+      .then(() => res.sendStatus(204))
       .catch(next)
   })

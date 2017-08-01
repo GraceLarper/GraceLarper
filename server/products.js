@@ -3,7 +3,7 @@
 const db = require('APP/db')
 const Product = db.model('products')
 
-const {mustBeLoggedIn, forbidden} = require('./auth.filters')
+const { mustBeLoggedIn, forbidden } = require('./auth.filters')
 
 // /keyword=?weapons
 
@@ -16,35 +16,33 @@ module.exports = require('express').Router()
   // have to add a role column to the users table to support
   // the concept of admin users.
   // forbidden('listing users is not allowed'),
-  (req, res, next) =>{
-    if(req.query.category){
+  (req, res, next) => {
+    if (req.query.category) {
       Product.findAll({
-        where:{
+        where: {
           category: req.query.category
         }
       })
-      .then(products=>res.json(products))
-      .catch(next)
+        .then(products => res.json(products))
+        .catch(next)
+    } else {
+      Product.findAll()
+        .then(products => res.json(products))
+        .catch(next)
     }
-    else{
-    Product.findAll()
-      .then(products => res.json(products))
-      .catch(next)}})
+  })
 
   .post('/',
   (req, res, next) =>
     Product.create(req.body)
       .then(product => res.status(201).json(product))
       .catch(next))
-
-
   .get('/:id',
   mustBeLoggedIn,
   (req, res, next) =>
     Product.findById(req.params.id)
       .then(product => res.json(product))
       .catch(next))
-
   .put('/:id', (req, res, next) => {
     Product.update(req.body, {
       where: {
@@ -54,10 +52,9 @@ module.exports = require('express').Router()
       plain: true,
     })
       .then(found => {
-        res.send({Products: found[1]})
+        res.send({ Products: found[1] })
       })
       .catch(next)
-
   })
   .delete('/:id', (req, res, next) => {
     Product.find({
@@ -68,11 +65,9 @@ module.exports = require('express').Router()
       .then(found => {
         if (!found) {
           res.sendStatus(404)
-        }
-        else return found;
-
+        } else return found
       })
-      .then((found) =>  found.destroy() )
-      .then(()=>res.sendStatus(204))
+      .then((found) => found.destroy())
+      .then(() => res.sendStatus(204))
       .catch(next)
   })
