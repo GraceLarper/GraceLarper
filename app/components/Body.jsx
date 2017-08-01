@@ -14,22 +14,22 @@ class Body extends Component {
             <Carousel.Item>
               <img style={{ width: 750, height: 750 }} src="/images/crowwbow.jpg" />
               <Carousel.Caption>
-                <h3>First slide label</h3>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                <h3>Omri's Crossbow</h3>
+                <p>When it shoots, you better REACT</p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
               <img style={{ width: 750, height: 750 }} alt="900x500" src="/images/boot.jpg" />
               <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h3>Kate's Boots</h3>
+                <p>If you're absent 4 times, you're getting the BOOT.</p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
               <img style={{ width: 750, height: 750 }} alt="900x500" src="/images/spear.jpg" />
               <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                <h3>Long Lance</h3>
+                <p>Poke people from afar.</p>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>

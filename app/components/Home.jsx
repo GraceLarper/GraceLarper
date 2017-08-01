@@ -9,6 +9,7 @@ import AllProducts from './AllProducts'
 import SingleProduct from './SingleProduct'
 import Orders from './Orders'
 import Profile from './Profile'
+import Purchased from './Purchased'
 
 class Home extends Component {
   render() {
@@ -23,6 +24,7 @@ class Home extends Component {
             <Route path='/cart' component={ Orders } />
             <Route path='/login-signup' component={ LoginSignup } />
             <Route path='/profile' component={ Profile } />
+            <Route path='/purchased' component={ Purchased } />
           </Switch>
         </main>
         <Footer />

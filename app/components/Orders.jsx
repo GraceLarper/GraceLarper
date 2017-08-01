@@ -32,8 +32,8 @@ class Orders extends Component {
     this.props.removeItem(this.props.cart.order, event.target.value)
   }
   checkoutClick(event) {
-    console.log('props', this.props.cart)
     this.props.checkout(this.props.cart.order)
+    this.props.history.push('/purchased')
   }
   render(props) {
     let totalPrice = 0
@@ -43,7 +43,7 @@ class Orders extends Component {
         <hr></hr>
         <div className="col-xs-10">
           {this.props.cart.productsForOrder ? this.props.cart.productsForOrder.map(product => {
-            totalPrice += product.product.price;
+            totalPrice += product.product.price
             return (
               <Accordion key={product.product.id}>
                 <Panel header={product.product.title} eventKey="2">
@@ -64,7 +64,7 @@ class Orders extends Component {
           }) : (<h1>Cart is Empty</h1>)}
           <div>
             <h3>{'Your Total is: $' + totalPrice + '.00'}</h3>
-            <Button onClick={this.checkoutClick} bsStyle="primary">Check Out</Button>&nbsp;
+            {totalPrice ? <Button onClick={this.checkoutClick} bsStyle="primary">Check Out</Button>: <Button onClick={this.checkoutClick} bsStyle="primary" disabled>Check Out</Button> }
         </div>
         </div>
       </div>

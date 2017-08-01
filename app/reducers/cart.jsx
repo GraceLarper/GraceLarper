@@ -82,8 +82,7 @@ export function removeItem(orderId, productId) {
 
 export function checkout(orderId) {
   return dispatch => {
-    axios.put(`/api/orders/${orderId}`, {status: 'Completed'})
-      .then(dispatch(getOrder(orderId)))
+    axios.put(`/api/orders/${orderId}`, { status: 'Completed' })
       .catch((e) => console.error(e))
   }
 }
