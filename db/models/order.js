@@ -10,6 +10,7 @@ module.exports = db => db.define('orders', {
   status: ENUM('Created', 'Processing', 'Cancelled', 'Completed')
 })
 
-module.exports.associations = (Order, { User, Product }) => {
+module.exports.associations = (Order, { User, Product, OrderProduct }) => {
     Order.belongsTo(User)
+    Order.belongsToMany(Product, {through: OrderProduct })
 }

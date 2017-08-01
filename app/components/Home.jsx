@@ -1,13 +1,7 @@
 import React, {Component} from 'react'
-import {render} from 'react-dom'
-import {Provider, connect} from 'react-redux'
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
-import { NavLink } from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom'
 
-import Login from './Login'
-import LoginPage from './LoginPage'
-import WhoAmI from './WhoAmI'
-import NotFound from './NotFound'
+import LoginSignup from './LoginSignup'
 import Footer from './Footer'
 import NavigationBar from './NavigationBar'
 import Body from './Body'
@@ -15,10 +9,7 @@ import AllProducts from './AllProducts'
 import SingleProduct from './SingleProduct'
 import Orders from './Orders'
 
-
 class Home extends Component {
-
-
   render() {
     return (
       <div>
@@ -29,7 +20,7 @@ class Home extends Component {
             <Route exact path="/products" component={ AllProducts } />
             <Route path='/products/:id' component={ SingleProduct } />
             <Route path='/cart' component={ Orders } />
-            <Route path='/login-signup' component={ LoginPage } />
+            <Route path='/login-signup' component={ LoginSignup } />
           </Switch>
         </main>
         <Footer />
@@ -38,5 +29,4 @@ class Home extends Component {
   }
 }
 
-
-export default Home;
+export default Home

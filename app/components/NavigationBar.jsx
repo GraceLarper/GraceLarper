@@ -12,15 +12,11 @@ import MenuItem from 'react-bootstrap/lib/MenuItem'
 import Login from './Login'
 import WhoAmI from './WhoAmI'
 
-class Navigationbar extends Component {
-  constructor(props){
-    super(props)
-  }
-
+class NavigationBar extends Component {
   render(props) {
     return (
-    <div>
-      <Navbar>
+      <div>
+        <Navbar>
 
           <Navbar.Header>
             <Navbar.Brand>
@@ -28,8 +24,7 @@ class Navigationbar extends Component {
             </Navbar.Brand>
           </Navbar.Header>
           <Nav>
-            <NavItem eventKey={1} href="/login-signup">Login</NavItem>
-            <NavItem eventKey={2} href="/login-signup">Sign Up</NavItem>
+            <NavItem eventKey={1} href="/login-signup">Login/SignUp</NavItem>
             <NavDropdown eventKey={3} title="Products" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1} href="/products">All Products</MenuItem>
               <MenuItem eventKey={3.2} href="/products?category=costume">Costumes</MenuItem>
@@ -37,8 +32,8 @@ class Navigationbar extends Component {
             </NavDropdown>
           </Nav>
           <Nav pullRight={true}>
-            {this.props.user ? <WhoAmI/> : <Login/>}
-            <Link to="/cart">My Cart <img src="/images/cart.jpg" style={{width: 25, height: 25}}/></Link>
+            {this.props.user ? <WhoAmI /> : <Login />}
+            <Link to="/cart">My Cart <img src="/images/cart.jpg" style={{ width: 25, height: 25 }} /></Link>
           </Nav>
         </Navbar>
       </div>
@@ -46,6 +41,6 @@ class Navigationbar extends Component {
   }
 }
 
-//CONTAINER
+// CONTAINER
 
-export default connect(({auth}) => ({user: auth}), null)(Navigationbar)
+export default connect(({ auth }) => ({ user: auth }), null)(NavigationBar)
