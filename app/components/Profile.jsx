@@ -10,8 +10,13 @@ import FormControl from 'react-bootstrap/lib/FormControl'
 import HelpBlock from 'react-bootstrap/lib/HelpBlock'
 import Grid from 'react-bootstrap/lib/Grid'
 import Well from 'react-bootstrap/lib/Well'
+import { getReviewsThunk } from '../reducers/reviews'
 
 class Profile extends Component {
+
+  componentWillMount() {
+    this.props.getReviewsThunk(this.props.user.id)
+  }
 
   render() {
     return (
@@ -20,12 +25,20 @@ class Profile extends Component {
         <h4><b>My Email:</b> {this.props.user.email}</h4>
         <h4><b>My Orders:</b></h4>
         <h4><b>My Reviews:</b></h4>
+        {this.props.reviews.map(review => (
+            <div key={review.id}>
+              <img style={{ height: 25, width: 100 }} src={'/images/' + review.starRating + 'star.jpg'} />
+              <Well>{review.comment}</Well>
+            </div>)
+          )
+        }
       </div>
     )
     }
 }
 const mapState = (state) => ({
-  user: state.auth
+  user: state.auth,
+  reviews: state.reviews.userReviews
 })
 
-export default connect(mapState, {})(Profile)
+export default connect(mapState, { getReviewsThunk })(Profile)
