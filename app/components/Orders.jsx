@@ -8,12 +8,13 @@ import Button from 'react-bootstrap/lib/Button'
 import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Media from 'react-bootstrap/lib/Media'
 import Image from 'react-bootstrap/lib/Image'
-import { getOrderThunk, getOrderIdThunk, removeItem } from '../reducers/cart'
+import { getOrderThunk, getOrderIdThunk, removeItem, checkout } from '../reducers/cart'
 
 class Orders extends Component {
   constructor(props) {
     super(props)
     this.onClick = this.onClick.bind(this)
+    this.checkoutClick = this.checkoutClick.bind(this)
   }
   componentDidMount() {
     this.props.getOrderIdThunk()
@@ -30,13 +31,19 @@ class Orders extends Component {
     event.preventDefault()
     this.props.removeItem(this.props.cart.order, event.target.value)
   }
+  checkoutClick(event) {
+    console.log('props', this.props.cart)
+    this.props.checkout(this.props.cart.order)
+  }
   render(props) {
+    let totalPrice = 0
     return (
       <div className="container">
         <h1>Shopping Cart</h1>
         <hr></hr>
         <div className="col-xs-10">
           {this.props.cart.productsForOrder ? this.props.cart.productsForOrder.map(product => {
+            totalPrice += product.product.price;
             return (
               <Accordion key={product.product.id}>
                 <Panel header={product.product.title} eventKey="2">
@@ -56,7 +63,8 @@ class Orders extends Component {
             )
           }) : (<h1>Cart is Empty</h1>)}
           <div>
-            <Button bsStyle="primary">Check Out</Button>&nbsp;
+            <h3>{'Your Total is: $' + totalPrice + '.00'}</h3>
+            <Button onClick={this.checkoutClick} bsStyle="primary">Check Out</Button>&nbsp;
         </div>
         </div>
       </div>
@@ -72,4 +80,4 @@ const mapState = (state) => {
   }
 }
 
-export default connect(mapState, { getOrderThunk, getOrderIdThunk, removeItem })(Orders)
+export default connect(mapState, { getOrderThunk, getOrderIdThunk, removeItem, checkout })(Orders)

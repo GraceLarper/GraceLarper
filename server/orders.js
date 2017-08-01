@@ -61,7 +61,6 @@ module.exports = require('express').Router()
         res.send({ Orders: found[1] })
       })
       .catch(next)
-
   })
   .delete('/:id', (req, res, next) => {
     Order.find({
@@ -74,7 +73,6 @@ module.exports = require('express').Router()
           res.sendStatus(404)
         }
         else return found;
-
       })
       .then((found) => found.destroy())
       .then(() => res.sendStatus(204))
