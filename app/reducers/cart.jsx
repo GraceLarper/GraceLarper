@@ -40,7 +40,7 @@ export function getOrderThunk(orderId) {
   return dispatch =>
   axios.get(`/api/orderproducts/${orderId}`)
   .then(order =>
-    dispatch(getOrder(order)))
+    dispatch(getOrder(order.data)))
 }
 
 // export const addToCartThunk = (product) => dispatch => {
