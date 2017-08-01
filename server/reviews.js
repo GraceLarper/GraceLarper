@@ -5,7 +5,6 @@ const Review = db.model('reviews')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
-
 module.exports = require('express').Router()
   .get('/',
   // The forbidden middleware will fail *all* requests to list users.
@@ -24,17 +23,24 @@ module.exports = require('express').Router()
     Review.create(req.body)
       .then(review => res.status(201).json(review))
       .catch(next))
+  .get('/myreviews',
+  (req, res, next) =>
+      Review.findAll({
+          where: {
+              user_id: req.user.id
+          }
+      })
+        .then(reviews => res.json(reviews))
+        .catch(next))
   .get('/:id',
-  mustBeLoggedIn,
   (req, res, next) =>
     Review.findAll({
         where: {
             product_id: req.params.id
         }
     })
-      .then(review => res.json(review))
+      .then(reviews => res.json(reviews))
       .catch(next))
-
   .put('/:id', (req, res, next) => {
     Review.update(req.body, {
       where: {

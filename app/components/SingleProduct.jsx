@@ -118,7 +118,7 @@ class SingleProduct extends Component {
 }
 const mapState = (state, componentProps) => ({
   products: state.products[0],
-  review: state.reviews,
+  review: state.reviews.reviews,
   auth: state.auth
 })
 
