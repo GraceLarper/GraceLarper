@@ -30,7 +30,7 @@ class AllProducts extends Component {
             <Row >
               {products.length && products.map(product => {
                 const productImage = `/images/${product.imageUrl}`
-                return (this.props.user && !this.props.user.isAdmin ? (
+                return (this.props.user !== '' && this.props.user.isAdmin ? (
                   <Col xs={6} md={3} key={product.id}>
                     <Thumbnail style={{ height: 512 }} src={productImage} alt="242x200">
                       <h3>{product.title}</h3>
@@ -40,6 +40,10 @@ class AllProducts extends Component {
                       <p>
                         <Button bsStyle="primary" name={product.id} onClick={() => this.props.addToCartThunk(product)}>Add to Cart</Button>&nbsp;
                         <NavLink to={`/products/${product.id}`}><Button bsStyle="link">View Details</Button>&nbsp;</NavLink>
+                      </p>
+                      <p>
+                        <Button bsStyle="btn btn-warning" name={product.id}>Edit Product</Button>&nbsp;
+                      <NavLink to={`#`}><Button bsStyle="btn btn-danger">Delete Product</Button>&nbsp;</NavLink>
                       </p>
                     </Thumbnail>
                   </Col>
@@ -54,10 +58,6 @@ class AllProducts extends Component {
                         <p>
                           <Button bsStyle="primary" name={product.id} onClick={() => this.props.addToCartThunk(product)}>Add to Cart</Button>&nbsp;
                         <NavLink to={`/products/${product.id}`}><Button bsStyle="link">View Details</Button>&nbsp;</NavLink>
-                        </p>
-                        <p>
-                          <Button bsStyle="btn btn-warning" name={product.id}>Edit Product</Button>&nbsp;
-                        <NavLink to={`#`}><Button bsStyle="btn btn-danger">Delete Product</Button>&nbsp;</NavLink>
                         </p>
                       </Thumbnail>
                     </Col>

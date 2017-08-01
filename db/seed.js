@@ -57,7 +57,7 @@ const orders = seed(Order,
   })
 )
 
-const reviews = seed(Review, 
+const reviews = seed(Review,
   ({users, products}) => ({
   review1: {
     comment: 'This is the best poison I have ever purchased. Totally got the job done.',
@@ -69,7 +69,7 @@ const reviews = seed(Review,
 
 const products = seed(Product, {
   sword: {
-    title: 'Broad Sword',
+    title: 'Omri Broad Sword',
     description: `King Solomon sword •Medieval Sword. This sword is a huge 45" Overall with a mirror finish 440 stainless steel 35" Blade.Intricate Molded Two-Tone Guard, Pommel & Hilt With Blue Felt. comes with plaque`,
     price: 129,
     imageUrl: 'sword.jpg',
@@ -128,7 +128,7 @@ const products = seed(Product, {
 
   },
   dagger: {
-    title: '10" Dragon Dagger',
+    title: "Emily's Dragon Dagger",
     description: `Silver Finished Intricate Detailing, Standing Dragon Cast Metal Handle, Dragon on both sides of cast metal scabbard with brilliant Blue background`,
     price: 13,
     imageUrl: 'dagger.jpg',
@@ -158,7 +158,7 @@ const products = seed(Product, {
 
   },
   joust: {
-    title: 'Jousting Lance for Kids',
+    title: "Jonathan's Jousting Lance for Kids",
     description: 'Playmobil Silver Jousting Lance For Knight, (Some Wear To Silver Coating & Slight Bend)',
     price: 169,
     imageUrl: 'joust.jpg',
@@ -208,7 +208,7 @@ const products = seed(Product, {
 
   },
   dress: {
-    title: 'Anjou Gown',
+    title: "Kate's Anjou Gown",
     description: `The romance of the early renaissance is captured in this courtly gown. The Anjou Gown has rich brocades, lavish trims, period rounded shoulders, and an elegant lace up back, all adding to the overall beauty of this piece.`,
     price: 339,
     imageUrl: 'dress.jpg',
