@@ -20,8 +20,11 @@ class Profile extends Component {
 
   render() {
     return (
-      <div>
+      <div className ="container">
+        <div className ="col-xs-1"></div>
+        <div className ="col-xs-11">
         <h1>Profile</h1>
+        <h4><b>My Name:</b> {this.props.user.name}</h4>
         <h4><b>My Email:</b> {this.props.user.email}</h4>
         <h4><b>My Orders:</b></h4>
         <h4><b>My Reviews:</b></h4>
@@ -32,6 +35,7 @@ class Profile extends Component {
             </div>)
           )
         }
+        </div>
       </div>
     )
     }
