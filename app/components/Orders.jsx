@@ -8,10 +8,20 @@ import Button from 'react-bootstrap/lib/Button'
 import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import Media from 'react-bootstrap/lib/Media'
 import Image from 'react-bootstrap/lib/Image'
+import { getOrderThunk } from '../reducers/cart'
 
+class Orders extends Component{
+  constructor(props){
+    super(props);
+  }
 
-class Orders extends Component {
-  render(props) {
+  componentDidMount() {
+    this.props.getOrderThunk(this.props.cart.order)
+
+  }
+
+ render(props){
+   console.log(this.props.cart)
     return (
       <div className="container">
         <h1>Shopping Cart</h1>
@@ -36,7 +46,7 @@ class Orders extends Component {
               </Accordion>
             )
           }) :
-          (<h1>Cart is Empty</h1>)}
+         (<h1>Cart is Empty</h1>)}
         <div>
           <Button bsStyle="primary">Check Out</Button>&nbsp;
         </div>
@@ -46,12 +56,12 @@ class Orders extends Component {
   }
 }
 
-// CONTAINER
+//CONTAINER
 
 const mapState = (state) => {
-  return {
-    cart: state.cart
-    }
+return {
+  cart: state.cart
+  }
 }
 
-export default connect(mapState, null)(Orders)
+export default connect(mapState, { getOrderThunk })(Orders)

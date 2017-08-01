@@ -26,14 +26,14 @@ module.exports = require('express').Router()
         .then(product => {
           order.addProduct(product)
         })
-        .then(product => res.send(product))
+        .then(product => res.send(order))
       })
       .catch(next)})
   .get('/:id',
   mustBeLoggedIn,
   (req, res, next) =>
     Order.findById(req.params.id)
-      .then(Order => res.json(order))
+      .then(order => res.json(order))
       .catch(next))
 
   .put('/:id', (req, res, next) => {

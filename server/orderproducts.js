@@ -5,7 +5,7 @@ const OrderProduct = db.model('OrderProduct')
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
 module.exports = require('express').Router()
-  .get('/',
+  .get('/:id',
   // The forbidden middleware will fail *all* requests to list users.
   // Remove it if you want to allow anyone to list all users on the site.
   //
@@ -16,8 +16,9 @@ module.exports = require('express').Router()
   (req, res, next) => {
     OrderProduct.findAll({
       where: {
-        user_id: req.user.id
+        order_id: req.params.id
       }
     })
-      .then(orders => res.json(orders))
-      .catch(next) })
+      .then(order => res.json(order))
+      .catch(next)
+  })
