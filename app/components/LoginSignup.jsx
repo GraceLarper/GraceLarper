@@ -14,7 +14,6 @@ class LoginSignup extends Component {
 
   onSubmit(event) {
     event.preventDefault()
-    console.log('signup', this.props.signup);
     const userInfo = {
       name: event.target.name.value,
       email: event.target.username.value,
@@ -27,7 +26,6 @@ class LoginSignup extends Component {
   }
 
   render(props) {
-    console.log('props', this.props)
     return (
       <div className="container">
         <div className="col-xs-4">
