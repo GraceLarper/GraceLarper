@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { addToCartThunk } from '../reducers/cart'
 import { getSingleProduct } from '../reducers/products'
 import { getReviewsForSingleProd, addNewReview } from '../reducers/reviews'
 
@@ -13,15 +14,12 @@ import HelpBlock from 'react-bootstrap/lib/HelpBlock'
 import Grid from 'react-bootstrap/lib/Grid'
 import Well from 'react-bootstrap/lib/Well'
 
-
-
 class SingleProduct extends Component {
   constructor(props) {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this)
   }
-
 
   onSubmit(event) {
     console.log(this.props)
@@ -36,11 +34,10 @@ class SingleProduct extends Component {
     addNewReview(newReview)
     event.target.comment.value = '';
   }
+
   onSubmitToCart(event){
-    
-
-
   }
+
   componentDidMount() {
     this.props.getReviewsForSingleProd(this.props.match.params.id)
     this.props.getSingleProduct(this.props.match.params.id)
@@ -63,7 +60,7 @@ class SingleProduct extends Component {
             <p>{singleProduct.description}</p>
             <h5>{'Stock:' + singleProduct.quantity}</h5>
             <p>
-              <Button bsStyle="primary">Add to Cart</Button>&nbsp;
+              <Button bsStyle="primary" onClick={() => this.props.addToCartThunk(singleProduct)}>Add to Cart</Button>&nbsp;
           </p>
 
           </div>
@@ -119,14 +116,10 @@ class SingleProduct extends Component {
     )
   }
 }
-function mapStateToProps(state, componentProps) {
-  return {
-    products: state.products[0],
-    review: state.reviews,
-    auth: state.auth
-  }
-}
+const mapState = (state, componentProps) => ({
+  products: state.products[0],
+  review: state.reviews,
+  auth: state.auth
+})
 
-
-
-export default connect(mapStateToProps, { getSingleProduct, getReviewsForSingleProd, addNewReview })(SingleProduct)
+export default connect(mapState, { getSingleProduct, getReviewsForSingleProd, addNewReview, addToCartThunk })(SingleProduct)
